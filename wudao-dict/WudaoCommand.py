@@ -95,6 +95,8 @@ class WudaoCommand:
                         # online search
                         from src.WudaoOnline import get_text, get_zh_text
                         from urllib.error import URLError
+                        import bs4
+                        import lxml
                         if self.is_zh:
                             word_info = get_zh_text(self.word)
                         else:
@@ -110,8 +112,8 @@ class WudaoCommand:
                             self.painter.draw_zh_text(word_info, self.conf)
                     except ImportError:
                         print('Word not found, auto Online search...')
-                        print('You need install bs4 first.')
-                        print('Use \'sudo pip3 install bs4\' or get bs4 online.')
+                        print('You need install bs4, lxml first.')
+                        print('Use \'sudo pip3 install bs4 lxml\' or get bs4 online.')
                 else:
                     print('Word not found, auto Online search...')
                     print('No Internet : Please check your connection')

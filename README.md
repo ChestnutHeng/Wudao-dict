@@ -34,24 +34,27 @@ issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新
 
 ### Linux 环境
 
-1. 安装环境: 需要python3和bs4 (在线搜索用)
+1. 安装环境: 需要python3和bs4, lxml(在线搜索用)
     #### Debian/Ubuntu
     ```
     sudo apt-get install python3
     sudo apt-get install python3-pip
     sudo pip3 install bs4
+    sudo pip3 install lxml
     ```
  
     #### OpenSUSE
     ```
     sudo zypper install python3-pip
     sudo pip3 install bs4
+    sudo pip3 install lxml
     ```
     #### CentOS
     ```
     sudo yum install python34
     sudo yum install python34-pip
     sudo pip3 install bs4
+    sudo pip3 install lxml
     ```
 
 2.  运行

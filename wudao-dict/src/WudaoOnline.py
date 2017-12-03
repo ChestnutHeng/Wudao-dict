@@ -33,7 +33,7 @@ def multi_space_to_single(text):
 def get_text(word):
     content = get_html(word)
     word_struct = {"word": word}
-    root = bs4.BeautifulSoup(content, "lxml")
+    root = bs4.BeautifulSoup(content, 'lxml')
 
     pron = {}
 
@@ -164,7 +164,7 @@ def get_text(word):
 def get_zh_text(word):
     content = get_html(word)
     word_struct = {"word": word}
-    root = bs4.BeautifulSoup(content, "lxml")
+    root = bs4.BeautifulSoup(content, 'lxml')
 
     # pronunciation
     pron = ''
