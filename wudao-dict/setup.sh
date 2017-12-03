@@ -24,3 +24,6 @@ sudo cp wd_com /etc/bash_completion.d/wd
 
 echo 'Setup Finished! '
 echo 'use wd [OPTION]... [WORD] to query the word.'
+echo '自动补全会在下次打开命令行时启用'
+echo '或者手动运行 source ~/.bashrc'
+

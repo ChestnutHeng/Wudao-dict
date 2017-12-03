@@ -114,9 +114,11 @@ class WudaoCommand:
                         print('Word not found, auto Online search...')
                         print('You need install bs4, lxml first.')
                         print('Use \'sudo pip3 install bs4 lxml\' or get bs4 online.')
+                        exit(0)
                 else:
                     print('Word not found, auto Online search...')
                     print('No Internet : Please check your connection')
+                    exit(0)
         if not self.conf['save'] and not self.is_zh:
             self.history_manager.save_note(word_info)
 
