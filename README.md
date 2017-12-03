@@ -5,6 +5,7 @@
 ---
 
 无道词典，是一个简洁优雅的有道词典命令行版本。支持英汉互查的功能，包含释义、词组、例句等有助于学习的内容。
+
 无道词典致力于做最好的命令行词典，随着我们优化排版、显示，增加生词本和补全功能，提供了良好的用户体验，并在不断改进中。
 
 英汉：
@@ -26,7 +27,9 @@
 ## 安装说明
 
 遇到任何问题，或者有任何改善建议请联系作者。 
+
 邮箱: chestnutheng@hotmail.com
+
 issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新的 issue</a>
 
 ### Linux 环境
@@ -51,17 +54,16 @@ issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新
     sudo pip3 install bs4
     ```
 
-2. 下载 https://github.com/ChestnutHeng/Wudao-dict/archive/master.zip (体积较小)，解压
-    
-    (或`$ git clone --depth=1 https://github.com/chestnutheng/wudao-dict`)
-    
-    运行
-    ```
-    $ cd ./wudao-dict/wudao-dict
-    $ sudo sh setup.sh
+2.  运行
+    ```sh
+    git clone https://github.com/chestnutheng/wudao-dict
+    cd ./wudao-dict/wudao-dict
+    sudo bash setup.sh #或者sudo ./setup.sh
     ```
 
     看到出现`Setup Finished!`表明安装成功。如果发生由于移动安装文件不能使用的情况，只需再次运行该脚本即可。
+
+无法clone的，可以下载 https://github.com/ChestnutHeng/Wudao-dict/archive/master.zip ,然后解压安装使用。
 
 **Note: 注意python的版本，只支持python3**
 
