@@ -27,7 +27,6 @@ class CommandDraw:
             else:
                 print(text)
         except BaseException as e:
-            raise e
             print(text)
     
     def draw_text(self, word, conf):
@@ -80,7 +79,6 @@ class CommandDraw:
                     for sv in v[2]:
                         sentence_t += self.GREEN_PATTERN % u'  例: ' + self.BROWN_PATTERN % (sv[0] + sv[1]) + '\n'
                     count += 1
-                    sentence_t += '\n'
                     print(sentence_t)
                 else:
                     # 21 new year dict
