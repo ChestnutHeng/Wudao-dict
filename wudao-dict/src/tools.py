@@ -8,7 +8,7 @@ import urllib.error
 def get_ip():
     if ie():
         try:
-            res = urlopen('http://chestnutheng.cn/IP')
+            res = urlopen('http://chestnutheng.cn/IP', timeout=1)
             xml = res.read().decode('utf-8')
             with open('./IP', 'w') as f:
                 f.write(xml)

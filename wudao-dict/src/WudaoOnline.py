@@ -10,7 +10,7 @@ from urllib.parse import quote
 def get_html(x):
     x = quote(x)
     url = urlparse('http://dict.youdao.com/search?q=%s' % x)
-    res = urlopen(url.geturl())
+    res = urlopen(url.geturl(), timeout=1)
     xml = res.read().decode('utf-8')
     return xml
 

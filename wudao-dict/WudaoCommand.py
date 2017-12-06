@@ -102,7 +102,7 @@ class WudaoCommand:
                         else:
                             word_info = get_text(self.word)
                         if not word_info['paraphrase']:
-                            print('No such word: %s found online' % self.word)
+                            print('No such word: %s found online' % (self.painter.RED_PATTERN % self.word))
                             exit(0)
                         # store struct
                         self.history_manager.add_word_info(word_info)
@@ -113,11 +113,14 @@ class WudaoCommand:
                     except ImportError:
                         print('Word not found, auto Online search...')
                         print('You need install bs4, lxml first.')
-                        print('Use \'sudo pip3 install bs4 lxml\' or get bs4 online.')
+                        print('Use ' + self.painter.RED_PATTERN % 'sudo pip3 install bs4 lxml' + ' or get bs4 online.')
                         exit(0)
+                    except URLError:
+                        print('Word not found, auto Online search...')
+                        print('No Internet : connection time out.')
                 else:
                     print('Word not found, auto Online search...')
-                    print('No Internet : Please check your connection')
+                    print('No Internet : Please check your connection or try again.')
                     exit(0)
         if not self.conf['save'] and not self.is_zh:
             self.history_manager.save_note(word_info)
