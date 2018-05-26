@@ -28,6 +28,7 @@ echo 'Comment=Youdao is wudao, a powerful dict.' >> ./wudao.desktop
 echo 'Comment[zh_CN]=有道即无道，一个强大的词典。' >> ./wudao.desktop
 echo "Exec=$PWD/start_gui.sh" >> ./wudao.desktop
 echo "Path=$PWD" >> ./wudao.desktop
+echo "Icon=$PWD/Logo.ico" >> ./wudao.desktop
 echo 'Terminal=false' >> ./wudao.desktop
 echo 'Type=Application' >> ./wudao.desktop
 echo 'Categories=Utility' >> ./wudao.desktop
