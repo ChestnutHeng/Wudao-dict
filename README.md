@@ -61,7 +61,7 @@ issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新
     ```sh
     git clone https://github.com/chestnutheng/wudao-dict
     cd ./wudao-dict/wudao-dict
-    sudo bash setup.sh #或者sudo ./setup.sh
+    bash setup.sh #或者./setup.sh
     ```
 
     看到出现`Setup Finished!`表明安装成功。如果发生由于移动安装文件不能使用的情况，只需再次运行该脚本即可。
