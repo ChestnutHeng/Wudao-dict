@@ -72,9 +72,9 @@ issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新
 
 
 ## 使用说明
+### 命令行
 
 运行`wd -h`查看使用说明。
-
 
 ```
 $ wd -h
@@ -90,6 +90,9 @@ Youdao is wudao, a powerful dict.
 
 查词时可以直接使用`wd 词语`查汉英词典，或`wd word`查英汉词典(可以自动检测)。
 
+### 图形界面
+
+打开启动器，选择“无道词典”或 Wudao（如果是英文系统的话）
 
 ## 小贴士
 
