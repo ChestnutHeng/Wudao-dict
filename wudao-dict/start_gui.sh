@@ -1,2 +1,8 @@
 #!/bin/bash
+count=`ps -ef | grep "python3 WudaoServer.py" | grep -v "grep" | wc -l`
+ 
+if [ $count == 0 ]; then
+    nohup python3 WudaoServer.py > ./usr/server.log 2>&1 &
+    git pull origin master > ./usr/pull.log 2>&1 &
+fi
 python3 ./mainwindow.py
