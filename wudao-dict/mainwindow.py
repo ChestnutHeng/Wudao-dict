@@ -28,9 +28,11 @@ class MainWindow(QMainWindow):
     def setup_ui(self):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        '''
         # auto complete
         self.auto_com_init()
         self.ui.ol_cb.setChecked(False)
+        '''
         darkula = QPalette()
         # theme
         darkula.setColor(QPalette.Background, QColor('#300A24'))
@@ -52,12 +54,14 @@ class MainWindow(QMainWindow):
         self.draw_conf = False
         self.search_bt_clicked()
 
+    '''
     # auto complete
     def auto_com_init(self):
         sl = ['a', 'air', 'airplane']
         com = QCompleter(sl)
         com.setCaseSensitivity(Qt.CaseInsensitive)
         self.ui.lineEdit.setCompleter(com)
+    '''
 
     def search_bt_clicked(self):
         self.word = self.ui.lineEdit.text().strip()
