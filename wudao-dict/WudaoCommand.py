@@ -10,11 +10,13 @@ from src.UserHistory import UserHistory
 from src.WudaoClient import WudaoClient
 from src.tools import is_alphabet
 from src.tools import ie
+from src.UserConfig import UserConfig
 
 
 class WudaoCommand:
     def __init__(self):
         # Member
+        self.UserConfig = UserConfig()
         self.word = ''
         self.param_list = []
         self.conf = {"short": False, "save": False}
@@ -25,21 +27,6 @@ class WudaoCommand:
         self.history_manager = UserHistory()
         # client
         self.client = WudaoClient()
-
-    # dump config as json file
-    def conf_dump(self):
-        with open("./usr/conf.json", "w+") as file:
-            file.write(json.dumps(self.conf, sort_keys=True, indent=4, separators=(',', ': ')))
-
-    # read config from json file
-    def conf_read(self):
-        try:
-            with open("./usr/conf.json", "r") as file:
-                self.conf=json.loads(file.read())
-        except IOError as e:
-            self.conf_dump()
-        except json.JSONDecodeError as e:
-            self.conf_dump()
 
     # init parameters
     def param_separate(self):
@@ -187,9 +174,10 @@ class WudaoCommand:
             self.history_manager.save_note(word_info)
         return
 
+
 def main():
     app = WudaoCommand()
-    app.conf_read()
+    app.UserConfig.conf_read()
     app.param_parse()
     app.query()
 

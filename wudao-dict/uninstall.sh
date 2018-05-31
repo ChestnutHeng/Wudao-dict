@@ -3,6 +3,7 @@ DESKTOP_ENTRY="/usr/share/applications/"
 INSTALL_PATH="/usr/bin"
 COMPLETION_PATH="/etc/bash_completion.d"
 
+# 关闭服务
 wd -k
 # 删除系统命令wd
 sudo rm -f $INSTALL_PATH/wd
@@ -14,4 +15,5 @@ sudo rm -f $COMPLETION_PATH/wd
 sudo rm -f $DESKTOP_ENTRY/wudao.desktop
 
 echo 'Uninstall Finished! '
+echo '请手动删除 Wudao-dict 文件夹'
 
