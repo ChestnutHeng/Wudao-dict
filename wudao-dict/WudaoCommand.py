@@ -66,8 +66,9 @@ class WudaoCommand:
             
             print('-k, --kill             kill the server process            (退出服务进程)')
             print('-h, --help             display this help and exit         (查看帮助)')
-            print('-s, --short-desc       show sentence or not               (只看释义)')
-            print('-S, --save             auto save to notebook or not       (是否自动存入生词本)')
+            print('-S, --short-desc       show sentence or not               (只看释义)')
+            print('-s  --save             save currently querying word       (保存当前正在查询的词)')
+            print('-a, --auto-save        auto save to notebook or not       (是否自动存入生词本)')
             print('-c  --config           show config                        (查看当前配置)')
             print('生词本文件: ' + os.path.abspath('./usr/') + '/notebook.txt')
             print('查询次数: ' + os.path.abspath('./usr/') + '/usr_word.json')
@@ -78,8 +79,8 @@ class WudaoCommand:
             self.client.close()
             sys.exit(0)
 
-        # switch short
-        if 's' in self.param_list or '-short-desc' in self.param_list:
+        # switch short desc
+        if 'S' in self.param_list or '-short-desc' in self.param_list:
             if self.conf['short']:
                 self.conf['short'] = False
                 print('short desc: off')
@@ -91,7 +92,7 @@ class WudaoCommand:
             self.conf_dump()
 
         # switch auto save
-        if 'S' in self.param_list or '-save' in self.param_list:
+        if 'a' in self.param_list or '-auto-save' in self.param_list:
             if self.conf['save']:
                 self.conf['save'] = False
                 print('auto save to notebook: off')
@@ -101,6 +102,16 @@ class WudaoCommand:
                 print('auto save to notebook: on')
                 print('自动保存到生词本: 开')
             self.conf_dump()
+
+        # save currently word
+        if 's' in self.param_list or '-save' in self.param_list:
+            self.tmp = self.conf['save']
+            self.conf['save'] = True
+            self.query()
+            self.conf['save'] = self.tmp
+            print(self.word + ' 已被存入生词本')
+            exit(0)
+
 
         # status
         if 'c' in self.param_list or '-status' in self.param_list:
@@ -173,8 +184,9 @@ class WudaoCommand:
                     print('Word not found, auto Online search...')
                     print('No Internet : Please check your connection or try again.')
                     exit(0)
-        if not self.conf['save'] and not self.is_zh:
+        if self.conf['save'] and not self.is_zh:
             self.history_manager.save_note(word_info)
+        return
 
 def main():
     app = WudaoCommand()
