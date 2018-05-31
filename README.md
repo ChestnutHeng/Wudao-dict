@@ -80,15 +80,17 @@ issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新
 $ wd -h
 Usage: wd [OPTION]... [WORD]
 Youdao is wudao, a powerful dict.
--k, --kill             kill the server process    (退出服务进程)
--h, --help             display this help and exit (查看帮助)
--s, --short-desc       do not show sentence       (只看释义)
--n, --not-save         query and save to notebook (不存入生词本)
-生词本文件: ... some path .../notebook.txt
-查询次数: ... some path .../usr_word.json
+-k, --kill             kill the server process            (退出服务进程)
+-h, --help             display this help and exit         (查看帮助)
+-S, --short-desc       show sentence or not               (只看释义)
+-s  --save             save currently querying word       (保存当前正在查询的词)
+-a, --auto-save        auto save to notebook or not       (是否自动存入生词本)
+-c  --config           show config                        (查看当前配置)
+生词本文件: /home/eric/Wudao-dict/wudao-dict/usr/notebook.txt
+查询次数: /home/eric/Wudao-dict/wudao-dict/usr/usr_word.json
 ```
 
-查词时可以直接使用`wd 词语`查汉英词典，或`wd word`查英汉词典(可以自动检测)。
+查词时可以直接使用`wd 词语`查汉英词典，或`wd word`查英汉词典(可以自动检测中英文)。
 
 ### 图形界面
 
@@ -97,7 +99,9 @@ Youdao is wudao, a powerful dict.
 ## 小贴士
 
 0. ./wd_monofile 是本词典的在线查询的单文件版本, 可以复制到`/usr/bin`下直接使用.(需要安装bs4)
-1. 如果您不想看到例句, 请在`/usr/bin/wd`中的`./wdd`后面加上-s参数.
+1. 如果您不想看到例句, 请使用`wd -S`来开启简略输出.
+2. 默认不启用自动存入生词本，如果你想让自己所查的词被自动存入单词本，请使用`wd -a`来开启自动保存.
+3. 如果你只想保存一个单词，而不愿开启自动保存，那你可以用`wd -s word`
 2. 有的用户反馈字体颜色看不清的问题, 你可以找到./wudao-dict/wudao-dict/src/CommandDraw.py, 可以看到释义,读音等采用的颜色, 直接修改即可.
 3. 查询词组直接键入类似`wd take off`即可.
 
