@@ -4,7 +4,7 @@ _wudao()
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
-    opts="--help --kill --short-desc"
+    opts="--help --kill --short-desc --save --auto-save --config"
     optl="
 the
 of
