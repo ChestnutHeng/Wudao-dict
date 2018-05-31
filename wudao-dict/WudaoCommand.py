@@ -31,12 +31,14 @@ class WudaoCommand:
         with open("./usr/conf.json", "w+") as file:
             file.write(json.dumps(self.conf, sort_keys=True, indent=4, separators=(',', ': ')))
 
+    # read config from json file
     def conf_read(self):
         try:
             with open("./usr/conf.json", "r") as file:
                 self.conf=json.loads(file.read())
         except IOError as e:
-            print('配置文件不存在，将使用默认配置！')
+            self.conf_dump()
+        except json.JSONDecodeError as e:
             self.conf_dump()
 
     # init parameters
@@ -69,13 +71,14 @@ class WudaoCommand:
             print('-c  --config           show config                        (查看当前配置)')
             print('生词本文件: ' + os.path.abspath('./usr/') + '/notebook.txt')
             print('查询次数: ' + os.path.abspath('./usr/') + '/usr_word.json')
-            #print('-o, --online-search          search word online')
             exit(0)
+
         # close server
         if 'k' in self.param_list or '-kill' in self.param_list:
             self.client.close()
             sys.exit(0)
-        # switch conf
+
+        # switch short
         if 's' in self.param_list or '-short-desc' in self.param_list:
             if self.conf['short']:
                 self.conf['short'] = False
@@ -87,6 +90,7 @@ class WudaoCommand:
                 print('简略输出: 开')
             self.conf_dump()
 
+        # switch auto save
         if 'S' in self.param_list or '-save' in self.param_list:
             if self.conf['save']:
                 self.conf['save'] = False
@@ -116,7 +120,6 @@ class WudaoCommand:
             print('')
 
         if not self.word:
-            #print('Usage: wd [OPTION]... [WORD]')
             exit(0)
 
     # query word
