@@ -26,6 +26,19 @@ class WudaoCommand:
         # client
         self.client = WudaoClient()
 
+    # dump config as json file
+    def conf_dump(self):
+        with open("./usr/conf.json", "w+") as file:
+            file.write(json.dumps(self.conf, sort_keys=True, indent=4, separators=(',', ': ')))
+
+    def conf_read(self):
+        try:
+            with open("./usr/conf.json", "r") as file:
+                self.conf=json.loads(file.read())
+        except IOError as e:
+            print('配置文件不存在，将使用默认配置！')
+            self.conf_dump()
+
     # init parameters
     def param_separate(self):
         if len(sys.argv) == 1:
@@ -49,10 +62,11 @@ class WudaoCommand:
             print('Usage: wd [OPTION]... [WORD]')
             print('Youdao is wudao, a powerful dict.')
             
-            print('-k, --kill             kill the server process    (退出服务进程)')
-            print('-h, --help             display this help and exit (查看帮助)')
-            print('-s, --short-desc       do not show sentence       (只看释义)')
-            print('-n, --not-save         query and save to notebook (不存入生词本)')
+            print('-k, --kill             kill the server process            (退出服务进程)')
+            print('-h, --help             display this help and exit         (查看帮助)')
+            print('-s, --short-desc       show sentence or not               (只看释义)')
+            print('-S, --save             auto save to notebook or not       (是否自动存入生词本)')
+            print('-c  --config           show config                        (查看当前配置)')
             print('生词本文件: ' + os.path.abspath('./usr/') + '/notebook.txt')
             print('查询次数: ' + os.path.abspath('./usr/') + '/usr_word.json')
             #print('-o, --online-search          search word online')
@@ -61,13 +75,48 @@ class WudaoCommand:
         if 'k' in self.param_list or '-kill' in self.param_list:
             self.client.close()
             sys.exit(0)
-        # short conf
+        # switch conf
         if 's' in self.param_list or '-short-desc' in self.param_list:
-            self.conf['short'] = True
-        if 'n' in self.param_list or '-not-save' in self.param_list:
-            self.conf['save'] = True
+            if self.conf['short']:
+                self.conf['short'] = False
+                print('short desc: off')
+                print('简略输出: 关')
+            else:
+                self.conf['short'] = True
+                print('short desc: on')
+                print('简略输出: 开')
+            self.conf_dump()
+
+        if 'S' in self.param_list or '-save' in self.param_list:
+            if self.conf['save']:
+                self.conf['save'] = False
+                print('auto save to notebook: off')
+                print('自动保存到生词本: 关')
+            else:
+                self.conf['save'] = True
+                print('auto save to notebook: on')
+                print('自动保存到生词本: 开')
+            self.conf_dump()
+
+        # status
+        if 'c' in self.param_list or '-status' in self.param_list:
+            if self.conf['short']:
+                print('short desc: on')
+                print('简略输出: 开')
+            else:
+                print('short desc: off')
+                print('简略输出: 关')
+            print('')
+            if self.conf['save']:
+                print('auto save to notebook: on')
+                print('自动保存到生词本: 开')
+            else:
+                print('auto save to notebook: off')
+                print('自动保存到生词本: 关')
+            print('')
+
         if not self.word:
-            print('Usage: wd [OPTION]... [WORD]')
+            #print('Usage: wd [OPTION]... [WORD]')
             exit(0)
 
     # query word
@@ -82,7 +131,6 @@ class WudaoCommand:
             if self.is_zh:
                 self.painter.draw_zh_text(word_info, self.conf)
             else:
-                
                 self.painter.draw_text(word_info, self.conf)
         else:
             # search in online cache first
@@ -127,6 +175,7 @@ class WudaoCommand:
 
 def main():
     app = WudaoCommand()
+    app.conf_read()
     app.param_parse()
     app.query()
 
