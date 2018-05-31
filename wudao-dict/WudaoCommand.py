@@ -63,7 +63,6 @@ class WudaoCommand:
         if 'h' in self.param_list or '-help' in self.param_list:
             print('Usage: wd [OPTION]... [WORD]')
             print('Youdao is wudao, a powerful dict.')
-            
             print('-k, --kill             kill the server process            (退出服务进程)')
             print('-h, --help             display this help and exit         (查看帮助)')
             print('-S, --short-desc       show sentence or not               (只看释义)')
