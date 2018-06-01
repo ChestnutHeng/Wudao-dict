@@ -3,7 +3,7 @@
 import socket
 import sys
 
-from src.JsonReader import JsonReader
+from src.DictReader import DictReader
 from src.tools import is_alphabet
 from src.tools import ie
 from src.tools import get_ip
@@ -13,7 +13,7 @@ from src.tools import report_old_word
 
 class WudaoServer:
     def __init__(self):
-        self.json_reader = JsonReader()
+        self.dict_reader = DictReader()
         self.ip = get_ip()
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -36,16 +36,16 @@ class WudaoServer:
             # Shutdown
             if word == '---shutdown keyword---':
                 self.server.close()
-                print('Bye!~~~')
+                print('Server Close\nBye!~~~')
                 sys.exit(0)
             # Get word
             try:
                 word_info = None
                 if word:
                     if is_alphabet(word[0]):
-                        word_info = self.json_reader.get_word_info(word)
+                        word_info = self.dict_reader.get_word_info(word)
                     else:
-                        word_info = self.json_reader.get_zh_word_info(word)
+                        word_info = self.dict_reader.get_zh_word_info(word)
                 if word_info is not None:
                     conn.sendall(word_info.encode('utf-8'))
                     print('Send: ' + str(len(word_info)) + ' bytes ')

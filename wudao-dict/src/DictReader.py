@@ -2,7 +2,7 @@
 import zlib
 import json
 
-class JsonReader:
+class DictReader:
     def __init__(self):
         self.__main_dict = {}
         self.FILE_NAME = './dict/en.z'
