@@ -9,7 +9,7 @@ class UserConfig:
     # dump config as json file
     def conf_dump(self, conf):
         with open(self.conf_file, "w+") as file:
-            file.write(json.dumps(self.conf, sort_keys=True, indent=4, separators=(',', ': ')))
+            json.dumps(self.conf,file , indent=4)
 
     # read config from json file
     def conf_read(self):
