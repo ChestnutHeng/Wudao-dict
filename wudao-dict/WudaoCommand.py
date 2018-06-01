@@ -55,9 +55,10 @@ class WudaoCommand:
             print('-S, --short-desc       show sentence or not               (只看释义)')
             print('-s  --save             save currently querying word       (保存当前正在查询的词)')
             print('-a, --auto-save        auto save to notebook or not       (是否自动存入生词本)')
+            print('-n  --notebook         show notebook                      (输出生词本内容)')
             print('-c  --config           show config                        (查看当前配置)')
-            print('生词本文件: ' + os.path.abspath('./usr/') + '/notebook.txt')
-            print('查询次数: ' + os.path.abspath('./usr/') + '/usr_word.json')
+            print('生词本文件: ' + os.path.abspath('./user/') + '/notebook.txt')
+            print('查询次数: ' + os.path.abspath('./user/') + '/usr_word.json')
             exit(0)
 
         # close server
@@ -98,6 +99,11 @@ class WudaoCommand:
             print(self.word + ' 已被存入生词本')
             exit(0)
 
+        # print notebook
+        if 'n' in self.param_list or '-notebook' in self.param_list:
+            note = self.history_manager.get_note()
+            for i in note:
+                self.painter.draw_text(i, self.conf)
 
         # status
         if 'c' in self.param_list or '-status' in self.param_list:

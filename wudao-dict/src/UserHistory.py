@@ -77,7 +77,7 @@ class UserHistory:
             return self.cache_dic[word.lower()]
         else:
             return None
-        
+
     def save_note(self, word_info):
         if not word_info in self.note:
             self.note.append(word_info)
@@ -85,3 +85,5 @@ class UserHistory:
         with open(self.NOTE_FILE, 'w+') as file:
             json.dump(self.note, file)
 
+    def get_note(self):
+        return self.note
