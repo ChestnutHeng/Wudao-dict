@@ -14,7 +14,7 @@ class UserConfig:
     def conf_read(self):
         try:
             with open(self.conf_file, "r") as file:
-                conf = json.loads(file.read())
+                conf = json.load(file)
             return conf
         except:
             self.conf_dump({"short": False, "save": False})

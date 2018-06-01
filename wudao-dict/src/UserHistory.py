@@ -18,8 +18,7 @@ class UserHistory:
         # Create empty file
         if not os.path.exists(self.WORD_COUNT):
             with open(self.WORD_COUNT, 'w+') as file:
-                tmp_dict = {}
-                json.dump(tmp_dict, file)
+                json.dump({}, file)
         if not os.path.exists(self.LATEST_FILE):
             open(self.LATEST_FILE, 'w+').close()
         if not os.path.exists(self.ONLINE_CACHE):
@@ -58,6 +57,12 @@ class UserHistory:
             # too much user word
             if len(self.word_count) <= self.MAX_COUNT_LEN:
                 json.dump(self.word_count, file, indent=4)
+
+    # get word count
+    def get_word_count(self):
+        with open(self.WORD_COUNT, 'r') as file:
+            self.word_count = json.load(file)
+        return self.word_count
 
     # add word info to online cache
     def add_word_info(self, word_info):

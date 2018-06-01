@@ -56,6 +56,7 @@ class WudaoCommand:
             print('-s  --save             save currently querying word       (保存当前正在查询的词)')
             print('-a, --auto-save        auto save to notebook or not       (是否自动存入生词本)')
             print('-n  --notebook         show notebook                      (输出生词本内容)')
+            print('-w  --word-count       show word count                    (输出查词计数)')
             print('-c  --config           show config                        (查看当前配置)')
             print('查询次数: ' + os.path.abspath('./user/') + '/usr_word.json')
             exit(0)
@@ -99,6 +100,13 @@ class WudaoCommand:
             note = self.history_manager.get_note()
             for i in note:
                 self.painter.draw_text(i, self.conf)
+
+        # print word count
+        if 'w' in self.param_list or '-wordcount' in self.param_list:
+            word_count = self.history_manager.get_word_count()
+            print('您的查词次数为')
+            for key, value in word_count.items():
+                print(key + '\t' + str(value) + '次')
 
         # status
         if 'c' in self.param_list or '-status' in self.param_list:
