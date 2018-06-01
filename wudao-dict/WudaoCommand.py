@@ -58,7 +58,6 @@ class WudaoCommand:
             print('-n  --notebook         show notebook                      (输出生词本内容)')
             print('-w  --word-count       show word count                    (输出查词计数)')
             print('-c  --config           show config                        (查看当前配置)')
-            print('查询次数: ' + os.path.abspath('./user/') + '/usr_word.json')
             exit(0)
 
         # close server
