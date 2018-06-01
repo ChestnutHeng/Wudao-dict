@@ -25,10 +25,10 @@ chmod -R 777 user
 
 # 添加系统命令wd
 echo '#!/bin/bash'>./wd
-echo 'save_path=$PWD'>>./wd
+echo 'save_path="$PWD"'>>./wd
 echo 'cd '$PWD >>./wd
 echo './wdd $*'>>./wd
-echo 'cd $save_path'>>./wd
+echo 'cd "$save_path"'>>./wd
 sudo mv ./wd $INSTALL_PATH/wd
 sudo chmod +x $INSTALL_PATH/wd
 
