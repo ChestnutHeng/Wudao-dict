@@ -57,7 +57,6 @@ class WudaoCommand:
             print('-a, --auto-save        auto save to notebook or not       (是否自动存入生词本)')
             print('-n  --notebook         show notebook                      (输出生词本内容)')
             print('-c  --config           show config                        (查看当前配置)')
-            print('生词本文件: ' + os.path.abspath('./user/') + '/notebook.txt')
             print('查询次数: ' + os.path.abspath('./user/') + '/usr_word.json')
             exit(0)
 
@@ -70,25 +69,21 @@ class WudaoCommand:
         if 'S' in self.param_list or '-short-desc' in self.param_list:
             if self.conf['short']:
                 self.conf['short'] = False
-                print('short desc: off')
                 print('简略输出: 关')
             else:
                 self.conf['short'] = True
-                print('short desc: on')
                 print('简略输出: 开')
-            self.conf_dump()
+            self.UserConfig.conf_dump(self.conf)
 
         # switch auto save
         if 'a' in self.param_list or '-auto-save' in self.param_list:
             if self.conf['save']:
                 self.conf['save'] = False
-                print('auto save to notebook: off')
                 print('自动保存到生词本: 关')
             else:
                 self.conf['save'] = True
-                print('auto save to notebook: on')
                 print('自动保存到生词本: 开')
-            self.conf_dump()
+            self.UserConfig.conf_dump(self.conf)
 
         # save currently word
         if 's' in self.param_list or '-save' in self.param_list:
@@ -107,20 +102,15 @@ class WudaoCommand:
 
         # status
         if 'c' in self.param_list or '-status' in self.param_list:
+            self.conf = self.UserConfig.conf_read()
             if self.conf['short']:
-                print('short desc: on')
                 print('简略输出: 开')
             else:
-                print('short desc: off')
                 print('简略输出: 关')
-            print('')
             if self.conf['save']:
-                print('auto save to notebook: on')
                 print('自动保存到生词本: 开')
             else:
-                print('auto save to notebook: off')
                 print('自动保存到生词本: 关')
-            print('')
 
         if not self.word:
             exit(0)
@@ -183,7 +173,7 @@ class WudaoCommand:
 
 def main():
     app = WudaoCommand()
-    app.UserConfig.conf_read()
+    app.conf = app.UserConfig.conf_read()
     app.param_parse()
     app.query()
 

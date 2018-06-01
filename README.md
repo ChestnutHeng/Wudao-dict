@@ -85,9 +85,9 @@ Youdao is wudao, a powerful dict.
 -S, --short-desc       show sentence or not               (只看释义)
 -s  --save             save currently querying word       (保存当前正在查询的词)
 -a, --auto-save        auto save to notebook or not       (是否自动存入生词本)
+-n  --notebook         show notebook                      (输出生词本内容)
 -c  --config           show config                        (查看当前配置)
-生词本文件: /home/eric/Wudao-dict/wudao-dict/usr/notebook.txt
-查询次数: /home/eric/Wudao-dict/wudao-dict/usr/usr_word.json
+查询次数: /home/eric/Wudao-dict/wudao-dict/user/usr_word.json
 ```
 
 查词时可以直接使用`wd 词语`查汉英词典，或`wd word`查英汉词典(可以自动检测中英文)。
