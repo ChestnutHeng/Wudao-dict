@@ -10,10 +10,10 @@ class UserHistory:
     MAX_COUNT_LEN = 500000
     content = {}
     latest_word = []
-    DICT_FILE = './usr/usr_word.json'
-    LATEST_FILE = './usr/latest.txt'
-    ONLINE_CACHE = './usr/online_cache.json'
-    NOTE_FILE = './usr/notebook.txt'
+    DICT_FILE = './user/user_word.json'
+    LATEST_FILE = './user/latest.txt'
+    ONLINE_CACHE = './user/online_cache.json'
+    NOTE_FILE = './user/notebook.json'
 
     def __init__(self):
         # Create empty file
@@ -26,10 +26,17 @@ class UserHistory:
         if not os.path.exists(self.ONLINE_CACHE):
             with open(self.ONLINE_CACHE, 'w+') as file:
                 json.dump({}, file)
+        if not os.path.exists(self.NOTE_FILE):
+            with open(self.NOTE_FILE, 'w+') as file:
+                json.dump([], file)
+
+        # Load file
         with open(self.ONLINE_CACHE, 'r') as file:
             self.cache_dic = json.load(file)
         with open(self.DICT_FILE, 'r') as file:
             self.word_co_map = json.load(file)
+        with open(self.NOTE_FILE, 'r') as file:
+            self.note = json.load(file)
 
     def add_item(self, word):
         # Update word dict
@@ -49,13 +56,13 @@ class UserHistory:
             for v in self.latest_word:
                 file.write(v + '\n')
         with open(self.DICT_FILE, 'w') as file:
-            # too much usr word
+            # too much user word
             if len(self.word_co_map) <= self.MAX_COUNT_LEN:
                 json.dump(self.word_co_map, file, indent=4)
 
     # add word info to online cache
     def add_word_info(self, word_info):
-        # too much usr word
+        # too much user word
         if len(self.cache_dic) > self.MAX_CACHE_LEN:
             # remove
             self.cache_dic = {}
@@ -70,13 +77,11 @@ class UserHistory:
             return self.cache_dic[word.lower()]
         else:
             return None
-
-    def save_note(self, word_struct):
-        if False:#word_struct['word'] in self.word_co_map:
-            return
-        else:
-            with open(self.NOTE_FILE, 'a+') as file:
-                ph = ' '.join(word_struct['paraphrase']).replace('\n', ' ')
-                spaces = ' '*(20 - len(word_struct['word']))
-                file.write(word_struct['word'] + spaces + ' ' + ph + '\n')
+        
+    def save_note(self, word_info):
+        if not word_info in self.note:
+            self.note.append(word_info)
+        #print(self.note)
+        with open(self.NOTE_FILE, 'w+') as file:
+            json.dump(self.note, file)
 

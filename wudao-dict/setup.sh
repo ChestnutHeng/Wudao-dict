@@ -2,14 +2,26 @@
 DESKTOP_ENTRY="/usr/share/applications/"
 INSTALL_PATH="/usr/bin"
 COMPLETION_PATH="/etc/bash_completion.d"
+COLOR_RED='\033[31m'
+COLOR_RESET='\033[0m'
 
-# 用户词
-if [ ! -d usr ]
+if [ ! `pwd | grep wudao` ]
 then
-    mkdir usr
+    cd wudao-dict 2> /dev/null
+    if [ ! `pwd | grep wudao` ] ; then
+        echo -e "${COLOR_RED}请进入 Wudao-dict/wudao-dict 再运行此脚本${COLOR_RESET}"
+        echo -e "${COLOR_RED}终止安装${COLOR_RESET}"
+        exit 1
+    fi
 fi
 
-chmod -R 777 usr
+# 用户词
+if [ ! -d user ]
+then
+    mkdir user
+fi
+
+chmod -R 777 user
 
 # 添加系统命令wd
 echo '#!/bin/bash'>./wd
@@ -33,7 +45,6 @@ echo 'Terminal=false' >> ./wudao.desktop
 echo 'Type=Application' >> ./wudao.desktop
 echo 'Categories=Utility' >> ./wudao.desktop
 sudo rm $DESKTOP_ENTRY/wudao.desktop
-rm ~/.local/share/applications/wudao.desktop
 sudo mv ./wudao.desktop $DESKTOP_ENTRY
 
 # 添加自动补全

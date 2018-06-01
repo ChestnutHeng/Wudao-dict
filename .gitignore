@@ -97,7 +97,7 @@ ENV/
 
 /wudao-dict/dict/dict.json
 /wudao-dict/.idea/
-/wudao-dict/usr/*
+/wudao-dict/user/
 /wudao-dict/test.in
 /wudao-dict/dict/dict.index
 /wudao-dict/dict/zh_dict.index

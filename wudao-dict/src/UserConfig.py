@@ -3,11 +3,11 @@ import json
 
 class UserConfig:
     def __init__(self):
-        self.conf_file = './usr/conf.json'
+        self.conf_file = './user/conf.json'
         self.conf = {}
 
     # dump config as json file
-    def conf_dump(self, conf):
+    def conf_dump(self):
         with open(self.conf_file, "w+") as file:
             json.dumps(self.conf,file , indent=4)
 
