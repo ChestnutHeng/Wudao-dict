@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import socket
 import sys
+import logging
 
 from src.DictReader import DictReader
 from src.tools import is_alphabet
@@ -17,14 +18,15 @@ class WudaoServer:
         self.ip = get_ip()
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        logging.basicConfig(filename='./user/server.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%Y/%m/%d %H:%M:%S')
         # Singleton
         try:
             self.server.bind(("0.0.0.0", 23764))
         except OSError:
-            print('OSError: Port has been used.')
+            logging.error('OSError: Port has been used.')
             exit(0)
         self.server.listen(0)
-        print('Server on...')
+        logging.info('Server on...')
 
     def run(self):
         while True:
@@ -32,11 +34,11 @@ class WudaoServer:
             conn, addr = self.server.accept()
             data = conn.recv(256)
             word = data.decode('utf-8').strip()
-            print('Get:' + str(len(data)) + ' bytes ' + word)
+            logging.info('Get:' + str(len(data)) + ' bytes ' + word)
             # Shutdown
             if word == '---shutdown keyword---':
                 self.server.close()
-                print('Server Close\nBye!~~~')
+                logging.info('Server Close\nBye!~~~')
                 sys.exit(0)
             # Get word
             try:
@@ -48,25 +50,25 @@ class WudaoServer:
                         word_info = self.dict_reader.get_zh_word_info(word)
                 if word_info is not None:
                     conn.sendall(word_info.encode('utf-8'))
-                    print('Send: ' + str(len(word_info)) + ' bytes ')
+                    logging.info('Send: ' + str(len(word_info)) + ' bytes ')
                 else:
                     conn.sendall('None'.encode('utf-8'))
             except KeyError:
-                print('No words: ' + word)
+                logging.error('No words: ' + word)
             conn.close()
             # report
             try:
                 if ie():
                     if word_info is None:
                         report_new_word(word, self.ip)
-                        print('report new word')
+                        logging.error('report new word')
                     else:
                         report_old_word(word, self.ip)
-                        print('report old word')
+                        logging.error('report old word')
                 else:
-                    print('no ie, report failed')
+                    logging.error('no ie, report failed')
             except:
-                print('exception occured, report failed')
+                logging.error('exception occured, report failed')
 
 
 if __name__ == '__main__':
