@@ -3,6 +3,7 @@
 import socket
 import sys
 import logging
+import threading
 
 from src.DictReader import DictReader
 from src.tools import is_alphabet
@@ -12,13 +13,18 @@ from src.tools import report_new_word
 from src.tools import report_old_word
 
 
-class WudaoServer:
-    def __init__(self):
+class WudaoServer (threading.Thread):
+    def __init__(self, threadID, threadName):
+        # multithread
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.threadName = threadName
+
         self.dict_reader = DictReader()
         self.ip = get_ip()
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Define socket
         self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        logging.basicConfig(filename='./user/server.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%Y/%m/%d %H:%M:%S')
+        logging.basicConfig(filename='./user/server.log', level=logging.ERROR, format='%(asctime)s %(message)s', datefmt='%Y/%m/%d %H:%M:%S')
         # Singleton
         try:
             self.server.bind(("0.0.0.0", 23764))
@@ -70,6 +76,9 @@ class WudaoServer:
             except:
                 logging.error('exception occured, report failed')
 
+def main():
+    thread = WudaoServer(1, 'WudaoServer')
+    thread.start()
 
 if __name__ == '__main__':
     ws = WudaoServer()

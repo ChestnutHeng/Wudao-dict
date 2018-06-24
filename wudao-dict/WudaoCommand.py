@@ -50,7 +50,6 @@ class WudaoCommand:
         if 'h' in self.param_list or '-help' in self.param_list:
             print('Usage: wd [OPTION]... [WORD]')
             print('Youdao is wudao, a powerful dict.')
-            print('-k, --kill             kill the server process            (退出服务进程)')
             print('-h, --help             display this help and exit         (查看帮助)')
             print('-S, --short-desc       show sentence or not               (只看释义)')
             print('-s  --save             save currently querying word       (保存当前正在查询的词)')
@@ -59,11 +58,6 @@ class WudaoCommand:
             print('-w  --word-count       show word count                    (输出查词计数)')
             print('-c  --config           show config                        (查看当前配置)')
             exit(0)
-
-        # close server
-        if 'k' in self.param_list or '-kill' in self.param_list:
-            self.client.close()
-            sys.exit(0)
 
         # switch short desc
         if 'S' in self.param_list or '-short-desc' in self.param_list:
@@ -183,6 +177,7 @@ def main():
     app.conf = app.UserConfig.conf_read()
     app.param_parse()
     app.query()
+    app.client.close()
 
 
 if __name__ == '__main__':
