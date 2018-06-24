@@ -14,7 +14,7 @@ class WudaoClient:
 
     def connect(self):
         # waiting for server init
-        self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Create socket
         beats, count = 0, 0
         while True:
             try:

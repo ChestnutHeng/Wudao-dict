@@ -16,7 +16,7 @@ class WudaoServer:
     def __init__(self):
         self.dict_reader = DictReader()
         self.ip = get_ip()
-        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Define socket
         self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         logging.basicConfig(filename='./user/server.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%Y/%m/%d %H:%M:%S')
         # Singleton

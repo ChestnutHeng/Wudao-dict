@@ -28,17 +28,16 @@
 
 遇到任何问题，或者有任何改善建议请联系作者。 
 
-邮箱: chestnutheng@hotmail.com
+邮箱: erickwok404@gmail.com
 
-issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新的 issue</a>
+issue: [创建新的issue](https://github.com/the-eric-kwok/Wudao-dict/issues)
 
 ### Linux 环境
 
 1. 安装环境: 需要python3和bs4, lxml(在线搜索用)
     #### Debian/Ubuntu
     ```
-    sudo apt-get install python3
-    sudo apt-get install python3-pip
+    sudo apt-get install python3 python3-pip
     sudo pip3 install bs4
     sudo pip3 install lxml
     ```
@@ -66,7 +65,7 @@ issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新
 
     看到出现`Setup Finished!`表明安装成功。如果发生由于移动安装文件不能使用的情况，只需再次运行该脚本即可。
 
-无法clone的，可以下载 https://github.com/ChestnutHeng/Wudao-dict/archive/master.zip ,然后解压安装使用。
+无法clone的，可以下载 https://github.com/the-eric-kwok/Wudao-dict/archive/master.zip ,然后解压安装使用。
 
 **Note: 注意python的版本，只支持python3**
 
