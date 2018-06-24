@@ -80,7 +80,7 @@ issue: [创建新的issue](https://github.com/the-eric-kwok/Wudao-dict/issues)
 
 可以使用Win+R运行cmd，然后输入python回车，如图所示
 
-
+![Demo](https://tuchuang001.com/images/2018/06/24/TIM20180624222444.png)
 
 OK的话，双击`setup.bat`进行安装（其实就是在桌面创建GUI的图标）
 
@@ -108,6 +108,11 @@ Youdao is wudao, a powerful dict.
 ### 图形界面
 
 打开启动器，选择“无道词典”或 Wudao（如果是英文系统的话）
+或者在桌面双击启动“无道词典”
+
+![gui_zh_demo](https://tuchuang001.com/images/2018/06/24/TIM20180624223735.png)
+
+![gui_en_demo](https://tuchuang001.com/images/2018/06/24/TIM20180624223832.png)
 
 ## 小贴士
 
