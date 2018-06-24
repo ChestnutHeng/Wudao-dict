@@ -26,7 +26,13 @@
 
 ## 安装说明
 
-遇到任何问题，或者有任何改善建议请联系作者。 
+当你想要提交issue时，首先执行
+    
+    git clone https://github.com/the-eric-kwok/wudao-dict
+    cd ./wudao-dict/wudao-dict
+    bash setup.sh #或者如果你在Windows下，那么是 .\setup.bat
+
+来更新到最新版本，再次测试是否还出现问题。
 
 邮箱: erickwok404@gmail.com
 
@@ -38,27 +44,24 @@ issue: [创建新的issue](https://github.com/the-eric-kwok/Wudao-dict/issues)
     #### Debian/Ubuntu
     ```
     sudo apt-get install python3 python3-pip
-    sudo pip3 install bs4
-    sudo pip3 install lxml
+    sudo pip3 install bs4 pyqt5 lxml
     ```
  
     #### OpenSUSE
     ```
     sudo zypper install python3-pip
-    sudo pip3 install bs4
-    sudo pip3 install lxml
+    sudo pip3 install bs4 lxml pyqt5
     ```
     #### CentOS
     ```
     sudo yum install python34
     sudo yum install python34-pip
-    sudo pip3 install bs4
-    sudo pip3 install lxml
+    sudo pip3 install bs4 lxml pyqt5
     ```
 
 2.  运行
     ```sh
-    git clone https://github.com/chestnutheng/wudao-dict
+    git clone https://github.com/the-eric-kwok/wudao-dict
     cd ./wudao-dict/wudao-dict
     bash setup.sh #或者./setup.sh
     ```
@@ -69,6 +72,17 @@ issue: [创建新的issue](https://github.com/the-eric-kwok/Wudao-dict/issues)
 
 **Note: 注意python的版本，只支持python3**
 
+###Windows
+
+下载安装Python：https://www.python.org/ftp/python/3.6.5/python-3.6.5.exe
+
+安装完成后检查自己的环境变量中是否已经存在Python
+
+可以使用Win+R运行cmd，然后输入python回车，如图所示
+
+
+
+OK的话，双击`setup.bat`进行安装（其实就是在桌面创建GUI的图标）
 
 ## 使用说明
 ### 命令行
@@ -131,5 +145,9 @@ Youdao is wudao, a powerful dict.
 #### Ver 2.1 (May 27, 2018)
 
 * 启用了图形界面
+
+#### Ver 2.2 (Jun 24, 2018)
+* 删除了所有系统调用，以增强跨平台可移植性
+* 目前已可在 Windows 下运行 GUI（命令行由于彩色显示的问题，默认不启用）
 
 

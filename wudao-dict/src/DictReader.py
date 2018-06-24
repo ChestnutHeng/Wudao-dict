@@ -19,7 +19,7 @@ class DictReader:
                 self.__index_dict[prev_word] = (int(prev_no), int(no) - int(prev_no))
                 prev_word, prev_no = word, no
             self.__index_dict[word] = (int(no), f.tell() - int(no))
-        with open(self.ZH_INDEX_FILE_NAME, 'r') as f:
+        with open(self.ZH_INDEX_FILE_NAME, 'r', encoding='UTF-8') as f:
             lines = f.readlines()
             prev_word, prev_no = lines[0].split('|')
             for v in lines[1:]:

@@ -15,6 +15,9 @@ then
     fi
 fi
 
+# 安装依赖
+pip3 install pyqt5 bs4 lxml
+
 # 用户词
 if [ ! -d user ]
 then
@@ -38,7 +41,7 @@ echo 'Name=Wudao' >> ./wudao.desktop
 echo 'Name[zh_CN]=无道词典' >> ./wudao.desktop
 echo 'Comment=Youdao is wudao, a powerful dict.' >> ./wudao.desktop
 echo 'Comment[zh_CN]=有道即无道，一个强大的词典。' >> ./wudao.desktop
-echo "Exec=$PWD/start_gui.sh" >> ./wudao.desktop
+echo "Exec=python3 $PWD/mainwindow.py" >> ./wudao.desktop
 echo "Path=$PWD" >> ./wudao.desktop
 echo "Icon=$PWD/Logo.ico" >> ./wudao.desktop
 echo 'Terminal=false' >> ./wudao.desktop

@@ -3,8 +3,6 @@ DESKTOP_ENTRY="/usr/share/applications/"
 INSTALL_PATH="/usr/bin"
 COMPLETION_PATH="/etc/bash_completion.d"
 
-# 关闭服务
-wd -k
 # 删除系统命令wd
 sudo rm -f $INSTALL_PATH/wd
 
