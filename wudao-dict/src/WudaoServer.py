@@ -16,10 +16,10 @@ from src.tools import report_old_word
 class WudaoServer (threading.Thread):
     def __init__(self, threadID, threadName):
         # multithread
-        threading.Thread.__init__(self)
+        threading.Thread.__init__(self, daemon=True) # 声明线程为 daemon 线程，这样关闭词典的时候就会自动结束线程
         self.threadID = threadID
         self.threadName = threadName
-
+        #self.threads = []
         self.dict_reader = DictReader()
         self.ip = get_ip()
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Define socket
@@ -77,10 +77,9 @@ class WudaoServer (threading.Thread):
                 logging.error('exception occured, report failed')
 
 def main():
-    thread = WudaoServer(1, 'WudaoServer')
-    thread.start()
+    ws = WudaoServer(1, 'WudaoServer')
+    ws.start()
 
 if __name__ == '__main__':
-    ws = WudaoServer()
-    ws.run()
+    main()
 

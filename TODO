@@ -1,2 +1,3 @@
 todo: 添加通过管道输入文本并且翻译的功能
 todo: GUI 中添加按钮，从GUI打开单词本
+todo: 从文本框获取首字母，调用GuiCompletion.py，返回列表，并且自动补全

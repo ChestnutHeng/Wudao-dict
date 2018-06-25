@@ -9,12 +9,15 @@ from src.GuiDraw import GuiDraw
 from src.WudaoClient import WudaoClient
 from src.tools import is_alphabet
 from src.UserHistory import UserHistory
+from src.GuiComplete import GuiComplete
+from src.WudaoServer import WudaoServer
 
 
 class MainWindow(QMainWindow):
     ui = None
     mainWindow = None
     client = WudaoClient()
+    server = WudaoServer(1, 'WudaoServer')
     painter = GuiDraw()
     draw_conf = True
     is_zh = False
@@ -24,15 +27,16 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(parent)
         self.history_manager = UserHistory()
         self.setup_ui()
+        self.m_model = QStandardItemModel(0, 1, self)
+        self.m_completer = QCompleter(self.m_model, self)
+        self.ui.lineEdit.setCompleter(self.m_completer)
+        self.lineEdit_notEmpty = False
+        self.server.start()
 
     def setup_ui(self):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        '''
-        # auto complete
-        self.auto_com_init()
-        self.ui.ol_cb.setChecked(False)
-        '''
+
         darkula = QPalette()
         # theme
         darkula.setColor(QPalette.Background, QColor('#300A24'))
@@ -43,8 +47,11 @@ class MainWindow(QMainWindow):
         # signal slot
         self.ui.lineEdit.returnPressed.connect(self.search_bt_clicked)
         self.ui.search_b.clicked.connect(self.search_bt_clicked)
+        self.ui.lineEdit.editingFinished.connect(self.search_bt_clicked)
         self.ui.detail_rb.clicked.connect(self.detail_rb_clicked)
         self.ui.intro_rb.clicked.connect(self.intro_rb_clicked)
+        self.ui.lineEdit.textEdited[str].connect(self.onTextChanged)
+
 
     def detail_rb_clicked(self):
         self.draw_conf = True
@@ -54,14 +61,23 @@ class MainWindow(QMainWindow):
         self.draw_conf = False
         self.search_bt_clicked()
 
-    '''
     # auto complete
+    def onTextChanged(self):
+        self.firstLetter = self.ui.lineEdit.text()[0:1]
+        print(self.firstLetter)
+        if self.lineEdit_notEmpty == False:
+            self.auto_com_init()
+        self.lineEdit_notEmpty = True
+        if self.firstLetter == '':
+            self.lineEdit_notEmpty = False
+
+    # auto complete init
     def auto_com_init(self):
-        sl = ['a', 'air', 'airplane']
-        com = QCompleter(sl)
-        com.setCaseSensitivity(Qt.CaseInsensitive)
-        self.ui.lineEdit.setCompleter(com)
-    '''
+        self.cl = GuiComplete().getCompletion(firstLetter=self.firstLetter)
+        self.com = QCompleter(self.cl)
+        self.com.setCaseSensitivity(Qt.CaseInsensitive)
+        self.ui.lineEdit.setCompleter(self.com)
+        self.com.activated[str].connect(self.search_bt_clicked) # if user activate any item, call search_bt_clicked()
 
     def search_bt_clicked(self):
         self.word = self.ui.lineEdit.text().strip()
@@ -127,10 +143,7 @@ def main():
     app = QApplication(sys.argv)
     win = MainWindow()
     win.show()
-    try:
-        sys.exit(app.exec_())
-    except SystemExit:
-        MainWindow.client.close()
+    sys.exit(app.exec_())
 
 if __name__ == '__main__':
     main()

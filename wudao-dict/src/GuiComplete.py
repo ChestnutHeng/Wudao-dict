@@ -1,6 +1,6 @@
 import json
 
-class GuiComplete:
+class GuiComplete():
     def __init__(self): #firstLetter = None):
         #self.firstLetter = firstLetter
         self.listA = ['and', 'a', 'as', 'at', 'are', 'an', 'all', 'about', 'also', 'any', 'after', 'against', 'another', 'again',
@@ -1064,17 +1064,9 @@ class GuiComplete:
         switch={
             'a': self.caseA(), 'b': self.caseB(), 'c': self.caseC(), 'd': self.caseD(), 'e': self.caseE(), 'f': self.caseF(), 'g': self.caseG(), 'h': self.caseH(), 'i': self.caseI(),
             'j': self.caseJ(), 'k': self.caseK(), 'l': self.caseL(), 'm': self.caseM(), 'n': self.caseN(), 'o': self.caseO(), 'p': self.caseP(), 'q': self.caseQ(), 'r': self.caseR(),
-            's': self.caseS(), 't': self.caseT(), 'u': self.caseU(), 'v': self.caseV(), 'w': self.caseW(), 'x': self.caseX(), 'y': self.caseY(), 'z': self.caseZ(),
-            'A': self.caseA(), 'B': self.caseB(), 'C': self.caseC(), 'D': self.caseD(), 'E': self.caseE(), 'F': self.caseF(), 'G': self.caseG(), 'H': self.caseH(), 'I': self.caseI(),
-            'J': self.caseJ(), 'K': self.caseK(), 'L': self.caseL(), 'M': self.caseM(), 'N': self.caseN(), 'O': self.caseO(), 'P': self.caseP(), 'Q': self.caseQ(), 'R': self.caseR(),
-            'S': self.caseS(), 'T': self.caseT(), 'U': self.caseU(), 'V': self.caseV(), 'W': self.caseW(), 'X': self.caseX(), 'Y': self.caseY(), 'Z': self.caseZ()
+            's': self.caseS(), 't': self.caseT(), 'u': self.caseU(), 'v': self.caseV(), 'w': self.caseW(), 'x': self.caseX(), 'y': self.caseY(), 'z': self.caseZ()
         }
         return switch[firstLetter]
 
-def main():
-    #com = GuiComplete('T')
-    #print(com.getCompletion())
-    print(GuiComplete.getCompletion('T'))
-
 if __name__ == "__main__":
-    main()
+    print(GuiComplete().getCompletion('T'))
