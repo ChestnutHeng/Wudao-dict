@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import json
 import sys
-import os
 
 
 from src.CommandDraw import CommandDraw
@@ -57,6 +56,7 @@ class WudaoCommand:
             print('-n  --notebook         show notebook                      (输出生词本内容)')
             print('-w  --word-count       show word count                    (输出查词计数)')
             print('-c  --config           show config                        (查看当前配置)')
+            #self.client.close()
             exit(0)
 
         # switch short desc
@@ -68,6 +68,8 @@ class WudaoCommand:
                 self.conf['short'] = True
                 print('简略输出: 开')
             self.UserConfig.conf_dump(self.conf)
+            #self.client.close()
+            exit(0)
 
         # switch auto save
         if 'a' in self.param_list or '-auto-save' in self.param_list:
@@ -78,6 +80,8 @@ class WudaoCommand:
                 self.conf['save'] = True
                 print('自动保存到生词本: 开')
             self.UserConfig.conf_dump(self.conf)
+            #self.client.close()
+            exit(0)
 
         # save currently word
         if 's' in self.param_list or '-save' in self.param_list:
@@ -86,6 +90,7 @@ class WudaoCommand:
             self.query()
             self.conf['save'] = self.tmp
             print(self.word + ' 已被存入生词本')
+            #self.client.close()
             exit(0)
 
         # print notebook
@@ -93,6 +98,8 @@ class WudaoCommand:
             note = self.history_manager.get_note()
             for i in note:
                 self.painter.draw_text(i, self.conf)
+            #self.client.close()
+            exit(0)
 
         # print word count
         if 'w' in self.param_list or '-wordcount' in self.param_list:
@@ -100,6 +107,8 @@ class WudaoCommand:
             print('您的查词次数为')
             for key, value in word_count.items():
                 print(key + '\t' + str(value) + '次')
+            #self.client.close()
+            exit(0)
 
         # status
         if 'c' in self.param_list or '-status' in self.param_list:
@@ -112,8 +121,11 @@ class WudaoCommand:
                 print('自动保存到生词本: 开')
             else:
                 print('自动保存到生词本: 关')
+            #self.client.close()
+            exit(0)
 
         if not self.word:
+            #self.client.close()
             exit(0)
 
     # query word
@@ -169,16 +181,14 @@ class WudaoCommand:
                     exit(0)
         if self.conf['save'] and not self.is_zh:
             self.history_manager.save_note(word_info)
+        self.client.close()
         return
-
 
 def main():
     app = WudaoCommand()
     app.conf = app.UserConfig.conf_read()
     app.param_parse()
     app.query()
-    app.client.close()
-
 
 if __name__ == '__main__':
     main()

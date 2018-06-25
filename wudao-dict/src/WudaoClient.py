@@ -9,7 +9,6 @@ class WudaoClient:
     def __init__(self):
         self.client = None
         self.RED_PATTERN = '\033[31m%s\033[0m'
-        src.WudaoServer.main()
         logging.basicConfig(filename='./user/client.log', level=logging.ERROR, format='%(asctime)s %(message)s', datefmt='%Y/%m/%d %H:%M:%S')
 
     def connect(self):
@@ -29,6 +28,7 @@ class WudaoClient:
                 beats += 1
 
     def get_word_info(self, word):
+        src.WudaoServer.main()  # Call up server
         self.connect()
         word = word.lower()
         self.client.sendall(word.encode('utf-8'))
