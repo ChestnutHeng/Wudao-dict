@@ -82,7 +82,7 @@ issue: [创建新的issue](https://github.com/the-eric-kwok/Wudao-dict/issues)
 
 ![](http://ww1.sinaimg.cn/large/b0ea9931gy1fsmnis71d9j20xz0hrdgb.jpg)
 
-OK的话，双击`setup.bat`进行安装（其实就是在桌面创建GUI的图标）
+OK的话，双击`setup.bat`进行安装
 
 ## 使用说明
 ### 命令行

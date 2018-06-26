@@ -1,8 +1,5 @@
-import json
-
 class GuiComplete():
-    def __init__(self): #firstLetter = None):
-        #self.firstLetter = firstLetter
+    def __init__(self):
         self.listA = ['and', 'a', 'as', 'at', 'are', 'an', 'all', 'about', 'also', 'any', 'after', 'against', 'another', 'again',
          'around', 'always', 'although', 'away', 'area', 'already', 'asked', 'almost', 'able', 'act', 'available',
          'above', 'anything', 'across', 'am', 'areas', 'among', 'action', 'age', 'actually', 'authority', 'along',
@@ -75,7 +72,7 @@ class GuiComplete():
          'astonishment', 'adventures', 'assurances', 'arches', 'arithmetic', 'apprehension', 'ashes', 'abdominal',
          'amenities', 'aristocracy', 'anticipate', 'ads', 'assemblies', 'aristocratic', 'anxieties', 'articulate',
          'adjective', 'altitude', 'acoustic', 'await', 'adjusting', 'advancement', 'ascent', 'ascertain',
-         'accidentally', 'admitting']
+         'accidentally', 'admitting', 'america', 'american']
 
         self.listB = ['be', 'by', 'but', 'been', 'between', 'back', 'being', 'before', 'because', 'both', 'business', 'best',
          'better', 'become', 'body', 'book', 'began', 'black', 'became', 'behind', 'big', 'believe', 'brought', 'based',
@@ -1031,40 +1028,40 @@ class GuiComplete():
          'yellow', 'yards', 'yours', 'yard', 'yield', 'youngsters', 'yer', 'ye', 'youngest', 'yacht', 'yields', 'yarn',
          'youths', 'yelled', 'yielded', 'youthful']
 
-        self.listZ = ['zone', 'zero', 'zones', 'zoo']
+        self.listZ = ['zone', 'zero', 'zones', 'zoo', 'zoom', 'zombie', 'zebra', 'zapping', 'zap', 'zip', 'zipping']
 
-    def caseA(self): return self.listA
-    def caseB(self): return self.listB
-    def caseC(self): return self.listC
-    def caseD(self): return self.listD
-    def caseE(self): return self.listE
-    def caseF(self): return self.listF
-    def caseG(self): return self.listG
-    def caseH(self): return self.listH
-    def caseI(self): return self.listI
-    def caseJ(self): return self.listJ
-    def caseK(self): return self.listK
-    def caseL(self): return self.listL
-    def caseM(self): return self.listM
-    def caseN(self): return self.listN
-    def caseO(self): return self.listO
-    def caseP(self): return self.listP
-    def caseQ(self): return self.listQ
-    def caseR(self): return self.listR
-    def caseS(self): return self.listS
-    def caseT(self): return self.listT
-    def caseU(self): return self.listU
-    def caseV(self): return self.listV
-    def caseW(self): return self.listW
-    def caseX(self): return self.listX
-    def caseY(self): return self.listY
-    def caseZ(self): return self.listZ
+    def __caseA__(self): return self.listA
+    def __caseB__(self): return self.listB
+    def __caseC__(self): return self.listC
+    def __caseD__(self): return self.listD
+    def __caseE__(self): return self.listE
+    def __caseF__(self): return self.listF
+    def __caseG__(self): return self.listG
+    def __caseH__(self): return self.listH
+    def __caseI__(self): return self.listI
+    def __caseJ__(self): return self.listJ
+    def __caseK__(self): return self.listK
+    def __caseL__(self): return self.listL
+    def __caseM__(self): return self.listM
+    def __caseN__(self): return self.listN
+    def __caseO__(self): return self.listO
+    def __caseP__(self): return self.listP
+    def __caseQ__(self): return self.listQ
+    def __caseR__(self): return self.listR
+    def __caseS__(self): return self.listS
+    def __caseT__(self): return self.listT
+    def __caseU__(self): return self.listU
+    def __caseV__(self): return self.listV
+    def __caseW__(self): return self.listW
+    def __caseX__(self): return self.listX
+    def __caseY__(self): return self.listY
+    def __caseZ__(self): return self.listZ
 
     def getCompletion(self, firstLetter = None):
         switch={
-            'a': self.caseA(), 'b': self.caseB(), 'c': self.caseC(), 'd': self.caseD(), 'e': self.caseE(), 'f': self.caseF(), 'g': self.caseG(), 'h': self.caseH(), 'i': self.caseI(),
-            'j': self.caseJ(), 'k': self.caseK(), 'l': self.caseL(), 'm': self.caseM(), 'n': self.caseN(), 'o': self.caseO(), 'p': self.caseP(), 'q': self.caseQ(), 'r': self.caseR(),
-            's': self.caseS(), 't': self.caseT(), 'u': self.caseU(), 'v': self.caseV(), 'w': self.caseW(), 'x': self.caseX(), 'y': self.caseY(), 'z': self.caseZ()
+            'a': self.__caseA__(), 'b': self.__caseB__(), 'c': self.__caseC__(), 'd': self.__caseD__(), 'e': self.__caseE__(), 'f': self.__caseF__(), 'g': self.__caseG__(), 'h': self.__caseH__(), 'i': self.__caseI__(),
+            'j': self.__caseJ__(), 'k': self.__caseK__(), 'l': self.__caseL__(), 'm': self.__caseM__(), 'n': self.__caseN__(), 'o': self.__caseO__(), 'p': self.__caseP__(), 'q': self.__caseQ__(), 'r': self.__caseR__(),
+            's': self.__caseS__(), 't': self.__caseT__(), 'u': self.__caseU__(), 'v': self.__caseV__(), 'w': self.__caseW__(), 'x': self.__caseX__(), 'y': self.__caseY__(), 'z': self.__caseZ__()
         }
 
         return switch[firstLetter]

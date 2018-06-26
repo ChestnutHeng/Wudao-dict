@@ -3,6 +3,8 @@
 import json
 import os
 
+class notebookIsEmpty(Exception):
+    pass
 
 class UserHistory:
     MAX_LATEST_LEN = 20
@@ -86,9 +88,20 @@ class UserHistory:
     def save_note(self, word_info):
         if not word_info in self.note:
             self.note.append(word_info)
-        #print(self.note)
         with open(self.NOTE_BOOK, 'w+') as file:
-            json.dump(self.note, file)
+            json.dump(self.note, file, indent=4)
+
+    def del_note(self, word_info):
+        if len(self.note) == 0:
+            raise notebookIsEmpty
+        if word_info in self.note:
+            self.note.remove(word_info)
+        with open(self.NOTE_BOOK, 'w+') as file:
+            json.dump(self.note, file, indent=4)
+
 
     def get_note(self):
+        if len(self.note) == 0:
+            raise notebookIsEmpty
         return self.note
+

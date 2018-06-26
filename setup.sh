@@ -31,7 +31,9 @@ echo '#!/bin/bash'>./wd
 echo 'save_path="$PWD"'>>./wd
 echo 'cd '$PWD >>./wd
 echo 'python3 WudaoCommand.py $*'>>./wd
+echo 'ErrorCode="$?"'>>./wd
 echo 'cd "$save_path"'>>./wd
+echo 'exit $ErrorCode'>>./wd
 chmod +x ./wd
 sudo mv ./wd $INSTALL_PATH/wd
 
