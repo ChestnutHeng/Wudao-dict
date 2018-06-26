@@ -92,7 +92,7 @@ class WudaoCommand:
                 exit(2)
             self.query_without_print()
             if not self.conf['save']:  # 若默认自动保存生词，则不必重复保存
-                self.history_manager.save_note(self.word_info)
+                self.history_manager.save_note(self.word, self.word_info)
             self.paint()
             print(self.word + ' 已被存入生词本')
             exit(0)
@@ -105,7 +105,7 @@ class WudaoCommand:
                 print('生词本为空！')
                 exit(3)
             for i in note:
-                self.painter.draw_text(i, self.conf)
+                self.painter.draw_text(note[i], self.conf)
             exit(0)
 
         # delete word from notebook
@@ -115,7 +115,7 @@ class WudaoCommand:
                 exit(4)
             self.query_without_print()
             try:
-                self.history_manager.del_note(self.word_info)
+                self.history_manager.del_note(self.word)
             except notebookIsEmpty:
                 print('生词本为空！')
                 exit(3)
@@ -186,7 +186,7 @@ class WudaoCommand:
         else:
             self.painter.draw_text(self.word_info, self.conf)
         if self.conf["save"] and not self.is_zh:
-            self.history_manager.save_note(self.word_info)
+            self.history_manager.save_note(self.word, self.word_info)
         return
 
 def main():
@@ -194,6 +194,7 @@ def main():
     app.conf = app.UserConfig.conf_read()
     app.param_parse()
     app.paint()
+    print(type(app.word))
 
 if __name__ == '__main__':
     main()

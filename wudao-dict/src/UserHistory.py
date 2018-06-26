@@ -15,6 +15,7 @@ class UserHistory:
     LATEST_FILE = './user/latest.txt'
     ONLINE_CACHE = './user/online_cache.json'
     NOTE_BOOK = './user/notebook.json'
+    note = {}
 
     def __init__(self):
         # Create empty file
@@ -28,7 +29,7 @@ class UserHistory:
                 json.dump({}, file)
         if not os.path.exists(self.NOTE_BOOK):
             with open(self.NOTE_BOOK, 'w+') as file:
-                json.dump([], file)
+                json.dump({}, file)
 
         # Load file
         with open(self.ONLINE_CACHE, 'r') as file:
@@ -85,17 +86,17 @@ class UserHistory:
             return None
 
     # save word to notebook
-    def save_note(self, word_info):
-        if not word_info in self.note:
-            self.note.append(word_info)
+    def save_note(self, word, word_info):
+        if not word in self.note:
+            self.note[word] = word_info
         with open(self.NOTE_BOOK, 'w+') as file:
             json.dump(self.note, file, indent=4)
 
-    def del_note(self, word_info):
+    def del_note(self, word):
         if len(self.note) == 0:
             raise notebookIsEmpty
-        if word_info in self.note:
-            self.note.remove(word_info)
+        if word in self.note:
+            del self.note[word]
         with open(self.NOTE_BOOK, 'w+') as file:
             json.dump(self.note, file, indent=4)
 
