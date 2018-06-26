@@ -1066,6 +1066,7 @@ class GuiComplete():
             'j': self.caseJ(), 'k': self.caseK(), 'l': self.caseL(), 'm': self.caseM(), 'n': self.caseN(), 'o': self.caseO(), 'p': self.caseP(), 'q': self.caseQ(), 'r': self.caseR(),
             's': self.caseS(), 't': self.caseT(), 'u': self.caseU(), 'v': self.caseV(), 'w': self.caseW(), 'x': self.caseX(), 'y': self.caseY(), 'z': self.caseZ()
         }
+
         return switch[firstLetter]
 
 if __name__ == "__main__":

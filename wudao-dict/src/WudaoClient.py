@@ -31,7 +31,7 @@ class WudaoClient:
 
     def get_word_info(self, word):
         #self.ws.main() # Call up server
-        #self.connect()
+        self.connect()
         word = word.lower()
         self.client.sendall(word.encode('utf-8'))
         server_context = b''

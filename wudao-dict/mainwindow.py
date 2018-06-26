@@ -1,8 +1,8 @@
+import sys
+import json
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-import sys
-import json
 
 from mainwindow_ui import Ui_MainWindow
 from src.GuiDraw import GuiDraw
@@ -11,7 +11,6 @@ from src.tools import is_alphabet
 from src.UserHistory import UserHistory
 from src.GuiComplete import GuiComplete
 from src.WudaoServer import WudaoServer
-
 
 class MainWindow(QMainWindow):
     ui = None
@@ -22,6 +21,8 @@ class MainWindow(QMainWindow):
     draw_conf = True
     is_zh = False
     word = ''
+    firstLetter = ''
+    lastTimeFirstLetter = ''
 
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
@@ -65,11 +66,13 @@ class MainWindow(QMainWindow):
     def onTextChanged(self):
         self.firstLetter = self.ui.lineEdit.text()[0:1]
         print(self.firstLetter)
-        if self.lineEdit_notEmpty == False:
+        if not self.lineEdit_notEmpty:
             self.auto_com_init()
-        self.lineEdit_notEmpty = True
-        if self.firstLetter == '':
+            self.lineEdit_notEmpty = True
+            self.lastTimeFirstLetter = self.firstLetter
+        if self.lastTimeFirstLetter != self.firstLetter and self.firstLetter != '':
             self.lineEdit_notEmpty = False
+            self.onTextChanged()
 
     # auto complete init
     def auto_com_init(self):
@@ -77,7 +80,7 @@ class MainWindow(QMainWindow):
         self.com = QCompleter(self.cl)
         self.com.setCaseSensitivity(Qt.CaseInsensitive)
         self.ui.lineEdit.setCompleter(self.com)
-        self.com.activated[str].connect(self.search_bt_clicked) # if user activate any item, call search_bt_clicked()
+        self.com.activated[str].connect(self.search_bt_clicked)  # if user activate any item, call search_bt_clicked()
 
     def search_bt_clicked(self):
         self.word = self.ui.lineEdit.text().strip()
@@ -144,6 +147,7 @@ def main():
     win = MainWindow()
     win.show()
     sys.exit(app.exec_())
+
 
 if __name__ == '__main__':
     main()
