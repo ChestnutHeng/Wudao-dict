@@ -113,6 +113,11 @@ Youdao is wudao, a powerful dict.
 ![](http://ww1.sinaimg.cn/large/b0ea9931gy1fsmnkerrurj20me0gb3zf.jpg)
 
 ![](http://ww1.sinaimg.cn/large/b0ea9931gy1fsmnkm3hfpj20me0gbjs7.jpg)
+
+**现已支持自动补全！！**
+
+![Demo](http://ww1.sinaimg.cn/large/b0ea9931gy1fsohslxsy6g20nb0gjahn.gif)
+
 ## 小贴士
 
 0. ./wd_monofile 是本词典的在线查询的单文件版本, 可以复制到`/usr/bin`下直接使用.(需要安装bs4)
@@ -151,7 +156,10 @@ Youdao is wudao, a powerful dict.
 * 启用了图形界面
 
 #### Ver 2.2 (Jun 24, 2018)
+
 * 删除了所有系统调用，以增强跨平台可移植性
 * 目前已可在 Windows 下运行 GUI（命令行由于彩色显示的问题，默认不启用）
 
+#### Ver 2.3 (Jun 26, 2018)
 
+* GUI 现已可以使用图形界面！
