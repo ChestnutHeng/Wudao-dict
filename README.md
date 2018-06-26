@@ -163,3 +163,5 @@ Youdao is wudao, a powerful dict.
 #### Ver 2.3 (Jun 26, 2018)
 
 * GUI 现已可以使用图形界面！
+* 给命令行增加了删除生词本内的单词的功能
+
