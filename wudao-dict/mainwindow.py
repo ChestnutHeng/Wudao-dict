@@ -66,11 +66,15 @@ class MainWindow(QMainWindow):
     def onTextChanged(self):
         self.firstLetter = self.ui.lineEdit.text()[0:1]
         print(self.firstLetter)
-        if not self.lineEdit_notEmpty:
+        if is_alphabet(self.firstLetter):  # 若输入的字符为非英文，则禁用自动补全
+            self.is_zh = False
+        else:
+            self.is_zh = True
+        if not self.lineEdit_notEmpty and not self.is_zh:  # 输入第一个字符时触发（输入框原来为空，输入后发射信号，并且将notEmpty置为True）
             self.auto_com_init()
             self.lineEdit_notEmpty = True
             self.lastTimeFirstLetter = self.firstLetter
-        if self.lastTimeFirstLetter != self.firstLetter and self.firstLetter != '':
+        if self.lastTimeFirstLetter != self.firstLetter and self.firstLetter != '' and not self.is_zh:
             self.lineEdit_notEmpty = False
             self.onTextChanged()
 
