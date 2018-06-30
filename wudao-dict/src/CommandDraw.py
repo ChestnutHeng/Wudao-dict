@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 import os
+from colorama import init, Fore
 
 class CommandDraw:
-    RED_PATTERN = '\033[31m%s\033[0m'
-    GREEN_PATTERN = '\033[32m%s\033[0m'
-    BLUE_PATTERN = '\033[34m%s\033[0m'
-    PEP_PATTERN = '\033[36m%s\033[0m'
-    BROWN_PATTERN = '\033[33m%s\033[0m'
+    # RED_PATTERN = '\033[31m%s\033[0m'
+    RED_PATTERN = Fore.RED+'%s'+Fore.RESET
+    # GREEN_PATTERN = '\033[32m%s\033[0m'
+    GREEN_PATTERN = Fore.GREEN+'%s'+Fore.RESET
+    # BLUE_PATTERN = '\033[34m%s\033[0m'
+    BLUE_PATTERN = Fore.BLUE+'%s'+Fore.RESET
+    # PEP_PATTERN = '\033[36m%s\033[0m'
+    PEP_PATTERN = Fore.CYAN+'%s'+Fore.RESET
+    # BROWN_PATTERN = '\033[33m%s\033[0m'
+    BROWN_PATTERN = Fore.YELLOW+'%s'+Fore.RESET
     
     @staticmethod
     def beautiy_print(text):
@@ -30,6 +36,7 @@ class CommandDraw:
             print(text)
     
     def draw_text(self, word, conf):
+        init()
         # Word
         print(self.RED_PATTERN % word['word'])
         # pronunciation
@@ -90,6 +97,7 @@ class CommandDraw:
                     count += 1
 
     def draw_zh_text(self, word, conf):
+        init()
         # Word
         print(self.RED_PATTERN % word['word'])
         # pronunciation
