@@ -6,4 +6,4 @@ echo set pwd=%%cd%% >> wd.bat
 echo cd /d %cd% >> wd.bat
 type _setup.txt >> wd.bat
 move wd.bat %USERPROFILE%\bin
-echo setup finishes successfully
+echo Setup Finished!
