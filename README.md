@@ -66,7 +66,7 @@ issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新
     sudo bash setup.sh #或者sudo ./setup.sh
     ```
     ```cmd
-    git clone https://github.com/chestnutheng/wudao-dict
+    git clone https://github.com/BruceChen2017/Wudao-dict.git
     cd wudao-dict\wudao-dict
     setup.bat
     ```
