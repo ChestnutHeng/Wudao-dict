@@ -14,7 +14,7 @@ class WudaoClient:
         beats = 0
         while True:
             try:
-                self.client.connect(("0.0.0.0", 23764))
+                self.client.connect(("127.0.0.1", 23764))
                 break
             except ConnectionRefusedError:
                 if beats >= 20:
