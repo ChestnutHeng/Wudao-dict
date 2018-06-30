@@ -57,7 +57,7 @@ issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新
     sudo pip3 install lxml
     ```
     #### Windows
-    pip install bs4 lxml colorama
+    `pip install bs4 lxml colorama`
 
 2.  运行
     ```sh
