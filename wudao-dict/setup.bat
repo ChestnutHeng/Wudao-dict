@@ -1,6 +1,8 @@
 @echo off
 if NOT exist usr md usr
-echo @echo off >> _wd_.bat
-echo set pwd=%%cd%% >> _wd_.bat
-echo cd /d %cd% >> _wd_.bat
-type _setup.txt >> _wd_.bat
+if NOT exist %USERPROFILE%\bin md %USERPROFILE%\bin
+echo @echo off >> wd.bat
+echo set pwd=%%cd%% >> wd.bat
+echo cd /d %cd% >> wd.bat
+type _setup.txt >> wd.bat
+move wd.bat %USERPROFILE%\bin
