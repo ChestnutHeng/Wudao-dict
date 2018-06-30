@@ -71,6 +71,7 @@ issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新
     setup.bat
     ```
     看到出现`Setup Finished!`表明安装成功。如果发生由于移动安装文件不能使用的情况，只需再次运行该脚本即可。
+    **Note:** 在**Windwos**下，安装成功后，需要将`%userprofile%\bin`添加到**PATH**变量中
 
 无法clone的，可以下载 https://github.com/ChestnutHeng/Wudao-dict/archive/master.zip ,然后解压安装使用。
 
