@@ -34,7 +34,7 @@ issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新
 
 ### Linux 环境
 
-1. 安装环境: 需要python3和bs4, lxml(在线搜索用)
+1. 安装环境: 需要python3和bs4, lxml(在线搜索用), colorama(支持windows下彩色输出)
     #### Debian/Ubuntu
     ```
     sudo apt-get install python3
@@ -56,6 +56,8 @@ issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新
     sudo pip3 install bs4
     sudo pip3 install lxml
     ```
+    #### Windows
+    `pip install bs4 lxml colorama`
 
 2.  运行
     ```sh
@@ -63,8 +65,13 @@ issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新
     cd ./wudao-dict/wudao-dict
     sudo bash setup.sh #或者sudo ./setup.sh
     ```
-
+    ```cmd
+    git clone https://github.com/BruceChen2017/Wudao-dict.git
+    cd wudao-dict\wudao-dict
+    setup.bat
+    ```
     看到出现`Setup Finished!`表明安装成功。如果发生由于移动安装文件不能使用的情况，只需再次运行该脚本即可。
+    **Note:** 在**Windwos**下，安装成功后，需要将`%userprofile%\bin`添加到**PATH**变量中
 
 无法clone的，可以下载 https://github.com/ChestnutHeng/Wudao-dict/archive/master.zip ,然后解压安装使用。
 

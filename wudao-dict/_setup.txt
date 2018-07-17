@@ -1,0 +1,6 @@
+SETLOCAL EnableExtensions
+set EXE=pythonw.exe
+FOR /F %%x IN ('tasklist /NH /FI "IMAGENAME eq %EXE%"') DO IF %%x == %EXE% goto FOUND
+start /b pythonw WudaoServer.py
+:FOUND
+wdd.bat %* && cd /d %pwd%

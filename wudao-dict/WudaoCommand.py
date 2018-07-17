@@ -3,7 +3,7 @@
 import json
 import sys
 import os
-
+from colorama import init, Fore
 
 from src.CommandDraw import CommandDraw
 from src.UserHistory import UserHistory
@@ -91,6 +91,7 @@ class WudaoCommand:
                 self.painter.draw_text(word_info, self.conf)
             else:
                 if ie():
+                    init()
                     try:
                         # online search
                         from src.WudaoOnline import get_text, get_zh_text
