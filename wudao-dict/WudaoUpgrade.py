@@ -10,7 +10,7 @@ def ie():
     try:
         urlopen('http://www.baidu.com', timeout=1)
         return True
-    except urllib.error.URLError as err: 
+    except urllib.error.URLError:
         return False
 
 def get_update():
@@ -21,9 +21,8 @@ def get_update():
     
     if ie():
         try:
-            res = urlopen('http://chestnutheng.cn/Ver', timeout=1)
+            res = urlopen('https://raw.githubusercontent.com/the-eric-kwok/Wudao-dict/master/wudao-dict/Ver', timeout=1)
             xml = res.read().decode('utf-8')
-            #xml = '1.0'
             web_ver = float(xml.strip())
             if web_ver > local_ver:
                 print('-'*60)

@@ -3,65 +3,80 @@
 import json
 import os
 
+class notebookIsEmpty(Exception):
+    pass
 
 class UserHistory:
     MAX_LATEST_LEN = 20
     MAX_CACHE_LEN = 10000
     MAX_COUNT_LEN = 500000
-    content = {}
     latest_word = []
-    DICT_FILE_NAME = './usr/usr_word.json'
-    LATEST_FILE_NAME = './usr/latest.txt'
-    ONLINE_CACHE = './usr/online_cache.json'
-    NOTE_NAME = './usr/notebook.txt'
+    WORD_COUNT = './user/user_word.json'
+    LATEST_FILE = './user/latest.txt'
+    ONLINE_CACHE = './user/online_cache.json'
+    NOTE_BOOK = './user/notebook.json'
+    note = {}
 
     def __init__(self):
         # Create empty file
-        if not os.path.exists(self.DICT_FILE_NAME):
-            with open(self.DICT_FILE_NAME, 'w+') as f:
-                tmp_dict = {}
-                json.dump(tmp_dict, f)
-        if not os.path.exists(self.LATEST_FILE_NAME):
-            open(self.LATEST_FILE_NAME, 'w+').close()
+        if not os.path.exists(self.WORD_COUNT):
+            with open(self.WORD_COUNT, 'w+') as file:
+                json.dump({}, file)
+        if not os.path.exists(self.LATEST_FILE):
+            open(self.LATEST_FILE, 'w+').close()
         if not os.path.exists(self.ONLINE_CACHE):
-            with open(self.ONLINE_CACHE, 'w+') as f:
-                json.dump({}, f)
-        with open(self.ONLINE_CACHE, 'r') as f:
-            self.cache_dic = json.load(f)
-        with open(self.DICT_FILE_NAME, 'r') as f:
-            self.word_co_map = json.load(f)
+            with open(self.ONLINE_CACHE, 'w+') as file:
+                json.dump({}, file)
+        if not os.path.exists(self.NOTE_BOOK):
+            with open(self.NOTE_BOOK, 'w+') as file:
+                json.dump({}, file)
+
+        # Load file
+        with open(self.ONLINE_CACHE, 'r') as file:
+            self.cache_dic = json.load(file)
+        with open(self.WORD_COUNT, 'r') as file:
+            self.word_count = json.load(file)
+        with open(self.NOTE_BOOK, 'r') as file:
+            self.note = json.load(file)
+
     def add_item(self, word):
         # Update word dict
-        if word in self.word_co_map:
-            self.word_co_map[word] += 1
+        if word in self.word_count:
+            self.word_count[word] += 1
         else:
-            self.word_co_map[word] = 1
+            self.word_count[word] = 1
         # Update latest word list
-        with open(self.LATEST_FILE_NAME, 'r') as f:
-            self.latest_word = [v.strip() for v in f.readlines()]
+        with open(self.LATEST_FILE, 'r') as file:
+            self.latest_word = [v.strip() for v in file.readlines()]
             if len(self.latest_word) < self.MAX_LATEST_LEN:
                 self.latest_word.append(word)
             else:
                 self.latest_word.pop(0)
                 self.latest_word.append(word)
-        with open(self.LATEST_FILE_NAME, 'w') as f:
+        with open(self.LATEST_FILE, 'w') as file:
             for v in self.latest_word:
-                f.write(v + '\n')
-        with open(self.DICT_FILE_NAME, 'w') as f:
-            # too much usr word
-            if len(self.word_co_map) <= self.MAX_COUNT_LEN:
-                json.dump(self.word_co_map, f, indent=4)
+                file.write(v + '\n')
+        with open(self.WORD_COUNT, 'w') as file:
+            # too much user word
+            if len(self.word_count) <= self.MAX_COUNT_LEN:
+                json.dump(self.word_count, file, indent=4)
+
+    # get word count
+    def get_word_count(self):
+        with open(self.WORD_COUNT, 'r') as file:
+            self.word_count = json.load(file)
+        return self.word_count
 
     # add word info to online cache
     def add_word_info(self, word_info):
-        # too much usr word
+        # too much user word
         if len(self.cache_dic) > self.MAX_CACHE_LEN:
             # remove
             self.cache_dic = {}
             os.remove(self.ONLINE_CACHE)
-        with open(self.ONLINE_CACHE, 'w') as f:
+        with open(self.ONLINE_CACHE, 'w') as file:
             self.cache_dic[word_info['word'].lower()] = word_info
-            json.dump(self.cache_dic, f)
+            json.dump(self.cache_dic, file)
 
     # get word info from online cache
     def get_word_info(self, word):
@@ -70,12 +85,24 @@ class UserHistory:
         else:
             return None
 
-    def save_note(self, word_struct):
-        if False:#word_struct['word'] in self.word_co_map:
-            return
-        else:
-            with open(self.NOTE_NAME, 'a+') as f:
-                ph = ' '.join(word_struct['paraphrase']).replace('\n', ' ')
-                spaces = ' '*(20 - len(word_struct['word']))
-                f.write(word_struct['word'] + spaces + ' ' + ph + '\n')
+    # save word to notebook
+    def save_note(self, word, word_info):
+        if not word in self.note:
+            self.note[word] = word_info
+        with open(self.NOTE_BOOK, 'w+') as file:
+            json.dump(self.note, file, indent=4)
+
+    def del_note(self, word):
+        if len(self.note) == 0:
+            raise notebookIsEmpty
+        if word in self.note:
+            del self.note[word]
+        with open(self.NOTE_BOOK, 'w+') as file:
+            json.dump(self.note, file, indent=4)
+
+
+    def get_note(self):
+        if len(self.note) == 0:
+            raise notebookIsEmpty
+        return self.note
 
