@@ -56,6 +56,14 @@ issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新
     sudo pip3 install bs4
     sudo pip3 install lxml
     ```
+    #### MacOS
+    ```
+    brew install python3
+    sudo easy_install pip
+    sudo pip install bs4
+    sudo pip install lxml
+    brew install bash-completion
+    ```
 
 2.  运行
     ```sh
@@ -118,6 +126,6 @@ Youdao is wudao, a powerful dict.
 * 修复了文件夹过大的问题，由263M缩小到80M左右。<a href="https://github.com/ChestnutHeng/Wudao-dict/issues/1"> issue #1: 文件夹大小</a>
 * 添加了更多的常用词和单复数形式
 * 取消了网络搜索功能，没有在本地找到时会自动进行网络搜索
-* 添加了tab补全的支持，对常用的1w词进行tab补全 <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/15">issue #15: 模糊查询的支持</a>
+* 添加了bash终端的tab补全的支持，对常用的1w词进行tab补全 <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/15">issue #15: 模糊查询的支持</a>
 * 添加了生词本功能，自动把查过的词和释义添加到生词本文件中
 * 优化了排版，同一单词不再截断换行了 #该功能因为转移字符的问题搁置 <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/16">issue #16:避免在单词内换行</a>
