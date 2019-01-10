@@ -75,7 +75,13 @@ class UserHistory:
             return
         else:
             with open(self.NOTE_NAME, 'a+') as f:
+                space1 = ' '*(20 - len(word_struct['word'])) + ' '
+                pn = ''
+                if '' in word_struct['pronunciation']:
+                    pn = word_struct['pronunciation']['']
+                elif '美' in word_struct['pronunciation']:
+                    pn = word_struct['pronunciation']['美']
+                space2 = ' '*(20 - len(pn)) + ' '
                 ph = ' '.join(word_struct['paraphrase']).replace('\n', ' ')
-                spaces = ' '*(20 - len(word_struct['word']))
-                f.write(word_struct['word'] + spaces + ' ' + ph + '\n')
+                f.write(word_struct['word'] + space1 + pn + space2 + ph + '\n')
 

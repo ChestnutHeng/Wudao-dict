@@ -5,6 +5,8 @@ from urllib.parse import quote
 import os
 import urllib.error
 
+mon_ip = '119.28.128.77'
+
 def get_ip():
     if ie():
         try:
@@ -18,13 +20,13 @@ def get_ip():
                 with open('./IP', 'r') as f:
                     return f.read().strip()
             else:
-                return '115.28.10.70'
+                return mon_ip
     else:
         if os.path.exists('./IP'):
             with open('./IP', 'r') as f:
                 return f.read().strip()
         else:
-            return '115.28.10.70'
+            return mon_ip
             
     
 def ie():
