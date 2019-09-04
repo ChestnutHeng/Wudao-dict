@@ -10,11 +10,11 @@
 
 英汉：
 
-![En_Zh Demo](https://public-1254282572.cos.ap-chengdu.myqcloud.com/wudao_en.png)
+![En_Zh Demo](https://github.com/ChestnutHeng/Wudao-dict/raw/master/img/wudao_en.png)
 
 汉英:
 
-![Zh_En Demo](https://public-1254282572.cos.ap-chengdu.myqcloud.com/wudao_zh.png)
+![Zh_En Demo](https://github.com/ChestnutHeng/Wudao-dict/raw/master/img/wudao_zh.png)
 
 ## 功能特性
 
