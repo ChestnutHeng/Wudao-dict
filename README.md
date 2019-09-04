@@ -10,11 +10,11 @@
 
 英汉：
 
-![En_Zh Demo](http://obbgthtoc.bkt.clouddn.com/gitScreenshot%20from%202016-09-22%2010-55-23.png)
+![En_Zh Demo](https://public-1254282572.cos.ap-chengdu.myqcloud.com/wudao_en.png)
 
 汉英:
 
-![Zh_En Demo](http://obbgthtoc.bkt.clouddn.com/Screenshot%20from%202016-09-22%2011-04-50.png)
+![Zh_En Demo](https://public-1254282572.cos.ap-chengdu.myqcloud.com/wudao_zh.png)
 
 ## 功能特性
 
