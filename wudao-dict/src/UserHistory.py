@@ -5,15 +5,17 @@ import os
 
 
 class UserHistory:
-    MAX_LATEST_LEN = 20
+    MAX_LATEST_LEN = 100
     MAX_CACHE_LEN = 10000
-    MAX_COUNT_LEN = 500000
+    MAX_COUNT_LEN = 50000
     content = {}
+    conf = {}
     latest_word = []
     DICT_FILE_NAME = './usr/usr_word.json'
     LATEST_FILE_NAME = './usr/latest.txt'
     ONLINE_CACHE = './usr/online_cache.json'
     NOTE_NAME = './usr/notebook.txt'
+    CONF_NAME = './usr/conf.json'
 
     def __init__(self):
         # Create empty file
@@ -26,10 +28,24 @@ class UserHistory:
         if not os.path.exists(self.ONLINE_CACHE):
             with open(self.ONLINE_CACHE, 'w+') as f:
                 json.dump({}, f)
+        if not os.path.exists(self.CONF_NAME):
+            with open(self.CONF_NAME, 'w+') as f:
+                json.dump({"short": False, "save": True}, f)
+        
+        # Load file
         with open(self.ONLINE_CACHE, 'r') as f:
             self.cache_dic = json.load(f)
         with open(self.DICT_FILE_NAME, 'r') as f:
             self.word_co_map = json.load(f)
+        with open(self.CONF_NAME, 'r') as f:
+            self.conf = json.load(f)
+    # save conf
+    def save_conf(self, conf):
+        if 'short' in conf and 'save' in conf:
+            with open(self.CONF_NAME, 'w+') as f:
+                    json.dump(conf, f)
+    
+    # add item to history
     def add_item(self, word):
         # Update word dict
         if word in self.word_co_map:
@@ -69,12 +85,12 @@ class UserHistory:
             return self.cache_dic[word.lower()]
         else:
             return None
-
-    def save_note(self, word_struct):
+    # save word to notebook
+    def save_note(self, word_struct, notename='notebook'):
         if False:#word_struct['word'] in self.word_co_map:
             return
         else:
-            with open(self.NOTE_NAME, 'a+') as f:
+            with open('./usr/' + notename + '.txt', 'a+') as f:
                 space1 = ' '*(20 - len(word_struct['word'])) + ' '
                 pn = ''
                 if '' in word_struct['pronunciation']:
