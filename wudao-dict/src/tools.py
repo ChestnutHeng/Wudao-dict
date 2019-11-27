@@ -10,7 +10,7 @@ mon_ip = '119.28.128.77'
 def get_ip():
     if ie():
         try:
-            res = urlopen('http://chestnutheng.cn/IP', timeout=1)
+            res = urlopen('https://chestnutheng.cn/IP', timeout=1)
             xml = res.read().decode('utf-8')
             with open('./IP', 'w') as f:
                 f.write(xml)
@@ -38,14 +38,14 @@ def ie():
 
 def report_new_word(x, ip):
     x = quote(x)
-    url = urlparse('http://' + ip + '/wudao/add_new_word/' + x)
+    url = urlparse('https://' + ip + '/wudao/add_new_word/' + x)
     res = urlopen(url.geturl(), timeout=1)
     xml = res.read().decode('utf-8')
     return xml
     
 def report_old_word(x, ip):
     x = quote(x)
-    url = urlparse('http://' + ip + '/wudao/add_old_word/' + x)
+    url = urlparse('https://' + ip + '/wudao/add_old_word/' + x)
     res = urlopen(url.geturl(), timeout=1)
     xml = res.read().decode('utf-8')
     return xml
