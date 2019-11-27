@@ -33,6 +33,8 @@ class UserHistory:
                 json.dump({"short": False, "save": True}, f)
 
         # Load file
+        with open(self.LATEST_FILE_NAME, 'r') as f:
+            self.latest_word = [v.strip() for v in f.readlines()]
         with open(self.ONLINE_CACHE, 'r') as f:
             self.cache_dic = json.load(f)
         with open(self.DICT_FILE_NAME, 'r') as f:
@@ -47,27 +49,27 @@ class UserHistory:
                     json.dump(conf, f)
 
     # add item to history
-    def add_item(self, word):
+    def add_item(self, word_info):
+        word = word_info['word']
         # Update word dict
         if word in self.word_co_map:
             self.word_co_map[word] += 1
         else:
             self.word_co_map[word] = 1
-        # Update latest word list
-        with open(self.LATEST_FILE_NAME, 'r') as f:
-            self.latest_word = [v.strip() for v in f.readlines()]
-            if len(self.latest_word) < self.MAX_LATEST_LEN:
-                self.latest_word.append(word)
-            else:
-                self.latest_word.pop(0)
-                self.latest_word.append(word)
-        with open(self.LATEST_FILE_NAME, 'w') as f:
-            for v in self.latest_word:
-                f.write(v + '\n')
         with open(self.DICT_FILE_NAME, 'w') as f:
             # too much usr word
             if len(self.word_co_map) <= self.MAX_COUNT_LEN:
                 json.dump(self.word_co_map, f, indent=4)
+        # Update latest word list
+        if len(self.latest_word) < self.MAX_LATEST_LEN:
+            self.latest_word.append(word)
+        else:
+            self.latest_word.pop(0)
+            self.latest_word.append(word)
+        with open(self.LATEST_FILE_NAME, 'w') as f:
+            for v in self.latest_word:
+                f.write(v + '\n')
+
 
     # add word info to online cache
     def add_word_info(self, word_info):
@@ -89,7 +91,7 @@ class UserHistory:
     # save word to notebook
 
     def save_note(self, word_struct, notename='notebook'):
-        if False:  # word_struct['word'] in self.word_co_map:
+        if word_struct['word'] in self.latest_word:
             return
         else:
             with open('./usr/' + notename + '.txt', 'a+') as f:
