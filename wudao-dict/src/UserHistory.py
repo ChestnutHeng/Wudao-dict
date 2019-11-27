@@ -31,7 +31,7 @@ class UserHistory:
         if not os.path.exists(self.CONF_NAME):
             with open(self.CONF_NAME, 'w+') as f:
                 json.dump({"short": False, "save": True}, f)
-        
+
         # Load file
         with open(self.ONLINE_CACHE, 'r') as f:
             self.cache_dic = json.load(f)
@@ -40,11 +40,12 @@ class UserHistory:
         with open(self.CONF_NAME, 'r') as f:
             self.conf = json.load(f)
     # save conf
+
     def save_conf(self, conf):
         if 'short' in conf and 'save' in conf:
             with open(self.CONF_NAME, 'w+') as f:
                     json.dump(conf, f)
-    
+
     # add item to history
     def add_item(self, word):
         # Update word dict
@@ -86,8 +87,9 @@ class UserHistory:
         else:
             return None
     # save word to notebook
+
     def save_note(self, word_struct, notename='notebook'):
-        if False:#word_struct['word'] in self.word_co_map:
+        if False:  # word_struct['word'] in self.word_co_map:
             return
         else:
             with open('./usr/' + notename + '.txt', 'a+') as f:
@@ -100,4 +102,3 @@ class UserHistory:
                 space2 = ' '*(20 - len(pn)) + ' '
                 ph = ' '.join(word_struct['paraphrase']).replace('\n', ' ')
                 f.write(word_struct['word'] + space1 + pn + space2 + ph + '\n')
-

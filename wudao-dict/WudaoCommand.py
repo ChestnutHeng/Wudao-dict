@@ -45,7 +45,6 @@ class WudaoCommand:
         if '-h' in self.param_list or '--help' in self.param_list:
             print('Usage: wd [OPTION]... [WORD]')
             print('Youdao is wudao, a powerful dict.')
-            
             print('-k, --kill             kill the server process    (退出服务进程)')
             print('-h, --help             display this help and exit (查看帮助)')
             print('-s, --short            do/don\'t show sentences   (简明/完整模式)')
@@ -121,7 +120,8 @@ class WudaoCommand:
                         else:
                             word_info = get_text(word)
                         if not word_info['paraphrase']:
-                            print('No such word: %s found online' % (self.painter.RED_PATTERN % word))
+                            print('No such word: %s found online' %
+                                  (self.painter.RED_PATTERN % word))
                             return
                         # store struct
                         self.history_manager.add_word_info(word_info)
@@ -132,7 +132,8 @@ class WudaoCommand:
                     except ImportError:
                         print('Word not found, auto Online search...')
                         print('You need install bs4, lxml first.')
-                        print('Use ' + self.painter.RED_PATTERN % 'sudo pip3 install bs4 lxml' + ' or get bs4 online.')
+                        print('Use ' + self.painter.RED_PATTERN %
+                              'sudo pip3 install bs4 lxml' + ' or get bs4 online.')
                         return
                     except URLError:
                         print('Word not found, auto Online search...')
@@ -143,10 +144,10 @@ class WudaoCommand:
                     return
         if self.conf['save'] and not is_zh:
             self.history_manager.save_note(word_info, notename)
-    
+
     # interaction mode
     def interaction(self):
-        self.conf = {'save':True, 'short':True, 'notename':'notebook'}
+        self.conf = {'save': True, 'short': True, 'notename': 'notebook'}
         while True:
             try:
                 inp = input('~ ')
@@ -179,6 +180,8 @@ class WudaoCommand:
                 continue
             if inp.strip():
                 self.query(inp.strip(), self.conf['notename'])
+
+
 def main():
     app = WudaoCommand()
     app.param_parse()
