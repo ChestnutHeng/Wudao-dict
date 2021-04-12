@@ -11,9 +11,9 @@ chmod -R 777 usr
 # 添加系统命令wd
 echo '#!/bin/bash'>./wd
 echo 'save_path=$PWD'>>./wd
-echo 'cd '$PWD >>./wd
+echo 'cd '\"$PWD\" >>./wd
 echo './wdd $*'>>./wd
-echo 'cd $save_path'>>./wd
+echo 'cd "$save_path"'>>./wd
 
 sysOS=`uname -s`
 if [ $sysOS == "Darwin" ];then
