@@ -209,7 +209,7 @@ def get_zh_text(word):
         p = ss(v, "p")
         ll = []
         for p in ss(v, "p"):
-            if len(p) == 0:
+            if not list(p):
                 continue
             if 'class' not in p.attrs:
                 ll.append(p.text.strip())
