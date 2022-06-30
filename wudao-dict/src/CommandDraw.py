@@ -44,7 +44,7 @@ class CommandDraw:
             print(uncommit)
         # paraphrase
         for v in word['paraphrase']:
-            print(self.BLUE_PATTERN % v)
+            print(v)
         # short desc
         if word['rank']:
             print(self.RED_PATTERN % word['rank'], end='  ')
@@ -99,7 +99,7 @@ class CommandDraw:
         if word['paraphrase']:
             for v in word['paraphrase']:
                 v = v.replace('  ;  ', ', ')
-                print(self.BLUE_PATTERN % v)
+                print(v)
         # complex
         if not conf['short']:
             # description

@@ -55,18 +55,19 @@ class WudaoServer:
                 print('No words: ' + word)
             conn.close()
             # report
-            try:
-                if ie():
-                    if word_info is None:
-                        report_new_word(word, self.ip)
-                        print('report new word')
-                    else:
-                        report_old_word(word, self.ip)
-                        print('report old word')
-                else:
-                    print('no ie, report failed')
-            except:
-                print('exception occured, report failed')
+            # 停止扩充词典
+            # try:
+            #     if ie():
+            #         if word_info is None:
+            #             report_new_word(word, self.ip)
+            #             print('report new word')
+            #         else:
+            #             report_old_word(word, self.ip)
+            #             print('report old word')
+            #     else:
+            #         print('no ie, report failed')
+            # except:
+            #     print('exception occured, report failed')
 
 
 if __name__ == '__main__':
