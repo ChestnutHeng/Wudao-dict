@@ -43,7 +43,6 @@ issue: <a href="https://github.com/ChestnutHeng/Wudao-dict/issues/new">创建新
     sudo pip3 install bs4
     sudo pip3 install lxml
     ```
- 
     #### OpenSUSE
     ```
     sudo zypper install python3-pip
@@ -101,6 +100,21 @@ Youdao is wudao, a powerful dict.
 
 查词时可以直接使用`wd 词语`查汉英词典，或`wd word`查英汉词典(可以自动检测)。
 
+## 配置
+
+支持通过环境变量配置Python环境地址和PAGER程序。将以下内容加入shell配置文件（`.bashrc`、`.zshrc`等），或在运行时指定（例如：`WD_PAGER=bat wd word` ）
+
+```bash
+# 系统存在多个Python环境时，建议指定专用python地址，例如`/usr/bin/python3`，避免切换环境时需重新安装bs4等依赖。不指定此变量则直接执行当前环境的`python3`
+export WD_PYTHON_PATH=/your/env/path/python
+# 指定pager命令。输出结果较长时可以使用翻页程序（例如`less`、`more`、`bat`等）翻页滚动。默认为空
+export WD_PAGER_COMMAND='less -F'  # -F参数设置less只有一页时不进入翻页模式
+```
+
+如图为指定`export WD_PAGER_COMMAND=bat`时的效果，可上下滚动查看内容：
+
+<!-- # ![Zh_En Demo](https://github.com/ChestnutHeng/Wudao-dict/raw/master/img/wudao_zh.png) -->
+![Pager Demo](./img/wudao_pager_bat.png)
 
 ## 小贴士
 
