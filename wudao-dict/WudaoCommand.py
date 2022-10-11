@@ -101,7 +101,7 @@ class WudaoCommand:
         # 1. query on server
         word_info = None
         server_context = self.client.get_word_info(word).strip()
-        if server_context != 'None':
+        if server_context and server_context != 'None':
             word_info = json.loads(server_context)
         # 2. search in online cache first
         if not word_info:
