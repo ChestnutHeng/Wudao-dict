@@ -1,11 +1,45 @@
 #!/bin/bash
 
-count=`ps -ef | grep "python3 WudaoServer.py" | grep -v "grep" | wc -l`
- 
+py=${WD_PYTHON_PATH:-python3}
+pager=${WD_PAGER_COMMAND}
+
+has_pymodule() {
+    $py -c "import $1" >/dev/null 2>&1
+}
+
+get_available_pager() {
+    for p in 'bat' 'less' 'more'; do
+        command -V $p >/dev/null 2>&1 && pager=$p
+        break
+    done
+    case $pager in
+    less)
+        pager='less -F'
+        ;;
+    esac
+}
+
+check_and_fix_pypath() {
+    [[ "$(which $py)" == /usr/bin/* ]] && return
+
+    if ! (has_pymodule 'lxml' && has_pymodule 'bs4'); then
+        # using system py
+        py=/usr/bin/python3
+    fi
+}
+
+[[ $py =~ python3? ]] && check_and_fix_pypath
+[[ -z $pager ]] && get_available_pager
+
+count=$(ps -ef | grep "python3 WudaoServer.py" | grep -v "grep" | wc -l)
+
 if [ $count == 0 ]; then
-    nohup python3 WudaoServer.py > ./usr/server.log 2>&1 &
-    git pull origin master > ./usr/pull.log 2>&1 &
+    nohup $py WudaoServer.py >./usr/server.log 2>&1 &
+    git pull origin master >./usr/pull.log 2>&1 &
 fi
 
-python3 WudaoCommand.py $*
-
+if [[ -n "${pager}" ]]; then
+    $py WudaoCommand.py $* | $pager
+else
+    $py WudaoCommand.py $*
+fi
