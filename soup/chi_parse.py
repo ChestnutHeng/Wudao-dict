@@ -107,10 +107,8 @@ if __name__ == "__main__":
         time.sleep(0.5)
         count += 1
         if count % 1000 == 0:
-            fw = open('new_data.txt', 'w+')
-            json.dump(tot_list, fw)
-            fw.close()
+            with open('new_data.txt', 'w+') as fw:
+                json.dump(tot_list, fw)
     
-    fw = open('new_data.txt', 'w+')
-    json.dump(tot_list, fw)
-    fw.close()
+    with open('new_data.txt', 'w+') as fw:
+        json.dump(tot_list, fw)
